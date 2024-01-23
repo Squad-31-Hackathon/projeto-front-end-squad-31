@@ -1,0 +1,78 @@
+:root{
+  --color-primary-70: #edeff2,
+  --color-primary-80: #444466,
+  --color-primary-90: #222244,
+  --color-primary-90: #111133,
+
+  --orange-100: #ffeecc,
+  --orange-200: #ffcc99,
+  --orange-300: #ffaa66,
+  --orange-400: #ff8833,
+  --orange-500: #ff5522,
+  --orange-600: #cc4400,
+  --orange-700: #993300,
+  --orange-800: #662200,
+
+  --gray-100: #fcfdff,
+  --gray-200: #e6e9f2,
+  --gray-300: #c2c4cc,
+  --gray-400: #a1a3aa,
+  --gray-500: #818388,
+  --gray-600: #515255,
+  --gray-700: #303133,
+  --gray-800: #0b0c0d,
+
+  --green-100: #eeffbb,
+  --green-200: #bbee88,
+  --green-300: #88cc66,
+  --green-400: #55bb44,
+  --green-500: #229922,
+  --green-600: #118822,
+  --green-700: #006622,
+  --green-800: #004422,
+
+  --yellow-100: #ffffcc,
+  --yellow-200: #ffee99,
+  --yellow-300: #ffee66,
+  --yellow-400: #ffdd33,
+  --yellow-500: #ffcc00,
+  --yellow-600: #cc9900,
+  --yellow-700: #997700,
+  --yellow-800: #664400,
+  
+  --red-100: #ffDDCC,
+  --red-300: #ffAA99,
+  --red-300: #ff7766,
+  --red-400: #ff4433,
+  --red-500: #DD0000,
+  --red-600: #BB0000,
+  --red-700: #880000,
+  --red-800: #660000,
+
+  --blue-100: #adcbfa,
+  --blue-300: #82a9f0,
+  --blue-300: #608ae1,
+  --blue-400: #315fce,
+  --blue-500: #2348b1,
+  --blue-600: #183594,
+  --blue-700: #0f2477,
+  --blue-800: #091862,
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 62.5%;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+}
