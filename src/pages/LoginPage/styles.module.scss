@@ -1,0 +1,25 @@
+
+.main{
+   flex-direction: row;
+   display: flex;
+   height: 100vh;
+   
+}
+
+.imgLogin {
+    height: 100%;
+    background-size: contain;
+}
+
+.formLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1{
+        font-size: 10px;
+    }
+}
+//rem 
+
+
