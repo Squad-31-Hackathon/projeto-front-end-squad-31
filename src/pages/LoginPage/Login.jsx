@@ -14,19 +14,19 @@ export default function Login() {
 
        <div className={styles.formLogin}>
 
+       <h1>Entre no Orange Portfólio</h1>
+
+
+       <h2>Faça login com email</h2>
+
         <InputEmail children={"Email"}/>
-        <InputNameAndLastName name={"Nome"} lastName={"Sobrenome"}/>
+
         <InputPassword/>
-        <UsButton children={"Confirmar"}/>
-        <h1></h1>
 
-        <button></button>
+        <UsButton children={"Entrar"}/>
 
-        <form action=""></form>
+        <a href="">Cadastre-se</a>
 
-        <button></button>
-
-        <a href=""></a>
        </div>
 
     </div>
