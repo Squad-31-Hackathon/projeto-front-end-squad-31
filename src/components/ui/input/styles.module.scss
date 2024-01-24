@@ -1,0 +1,31 @@
+.teste{
+    margin: 15px;
+    width: 100%;
+    height: 55px;
+    position: relative;
+    input{
+        width: 90%;
+        height: 100%;
+        background: transparent;
+        border: 2px solid #2c4766;
+        outline: none;
+        border-radius: 0.5rem;
+        padding: 0 16px;
+    }
+    label{
+        position: absolute;
+        padding: 3px;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #b35656;
+        pointer-events: none;
+    }
+
+}
+.teste input:valid~label{
+    top: 1px;
+    left: 20px;
+    background-color: #fff;
+}

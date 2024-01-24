@@ -1,6 +1,10 @@
+import { Input } from "./components/ui/input";
+
 export default function App() {
 
   return (
-    <div>Olá</div>
+    <>
+    <Input children={"Email"}/>
+    </>
   )
 }
