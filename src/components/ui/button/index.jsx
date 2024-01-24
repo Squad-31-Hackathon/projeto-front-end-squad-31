@@ -5,9 +5,10 @@ import styles from './styles.module.scss';
 
 //Para ser chamado no login e cadastro
 export function UsButton({children}){
-    return(      
-       
-        <Button className={styles.button} variant="contained">{children}</Button>
+    return(  
+        <div className={styles.div}>
+            <Button className={styles.button} variant="contained">{children}</Button>
+        </div>    
 
     )
 }

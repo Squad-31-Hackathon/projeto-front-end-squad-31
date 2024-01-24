@@ -1,5 +1,10 @@
+
 import { UsButton } from "./components/ui/button";
+
+
+
 import { InputEmail,InputNameAndLastName,InputPassword} from "./components/ui/input";
+
 
 
 export default function App() {
@@ -9,7 +14,7 @@ export default function App() {
     <InputEmail children={"Email"}/>
     <InputNameAndLastName name={"Nome"} lastName={"Sobrenome"}/>
     <InputPassword/>
-    <UsButton children={"Confirmar"}/>
+    <UsButton children={"teste"}/>
     </>
   )
 }
