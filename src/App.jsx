@@ -1,10 +1,15 @@
-import { Input } from "./components/ui/input";
+import { UsButton } from "./components/ui/button";
+import { InputEmail,InputNameAndLastName,InputPassword} from "./components/ui/input";
+
 
 export default function App() {
 
   return (
     <>
-    <Input children={"Email"}/>
+    <InputEmail children={"Email"}/>
+    <InputNameAndLastName name={"Nome"} lastName={"Sobrenome"}/>
+    <InputPassword/>
+    <UsButton children={"Confirmar"}/>
     </>
   )
 }

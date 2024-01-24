@@ -1,28 +1,57 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+
 import TextField from '@mui/material/TextField';
+import styles from './styles.module.scss';
 
-function error(){
-    
-}
 
-export function Input({children}){
+
+export function InputEmail({children}){
     return(      
-        <Box
-            component="form"
-            sx={{
-            '& .MuiTextField-root': { m: 1, width: '50ch' },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <div>
+       
+        
+            <div className={styles.div}>
             <TextField
-                required
+                className={styles.input}
+                
                 id="outlined-required"
                 label={children}
             />
             </div>
-        </Box>
+  
+    )
+}
+export function InputNameAndLastName({name,lastName}){
+    return(      
+            <div  className={styles.divDuo}>
+            <TextField 
+                className={styles.inputDuo}
+                required
+                id="outlined-required"
+                label={name}
+            />
+            <TextField
+                className={styles.inputDuo}
+                required
+                id="outlined-required"
+                label={lastName}
+            />
+            </div>
+
+    )
+}
+export function InputPassword(){
+    return(      
+       
+     
+        <div className={styles.div}>
+        <TextField
+            className={styles.input}
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+            />
+            </div>
+
     )
 }
