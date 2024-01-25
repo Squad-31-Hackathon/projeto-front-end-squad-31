@@ -7,6 +7,6 @@ import Register from './pages/RegisterPage/Register.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Login />
+    <Register />
   </React.StrictMode>,
 )
