@@ -12,7 +12,6 @@ export function InputEmail({children}){
             <div className={styles.div}>
             <TextField
                 className={styles.input}
-                
                 id="outlined-required"
                 label={children}
             />

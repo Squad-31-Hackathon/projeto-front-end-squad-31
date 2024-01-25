@@ -15,7 +15,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import styles from './styles.module.scss';
 
 const pages = ['Meus projetos', 'Descobrir'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 //../../../../public/LOGO-ORANGEPORTFOLIO.png
 export function UsHeader() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
