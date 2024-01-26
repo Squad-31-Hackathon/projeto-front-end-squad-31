@@ -22,10 +22,30 @@
 }
 @media (max-width: 520px) {
     .div{
+        width: 40rem;
+        .button{
+            width: 40rem;
+        }
+    }
+
+}
+@media (max-width: 560px) {
+    .div{
         width: 48rem;
         .button{
             width: 48rem;
         }
     }
 
+}
+@media (max-width: 412px) {
+    
+    .div{
+        .button{
+            display: flex;
+            height: 56px;
+            width: 37rem;
+
+        }
+    }
 }
