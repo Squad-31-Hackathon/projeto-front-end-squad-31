@@ -1,0 +1,31 @@
+
+
+
+.div{
+    margin: 1rem;
+    margin-bottom: 1.6rem;
+    margin-top: 1.6rem;
+    width: 51.7rem;
+    height: 4.2rem;
+    font-size: 1.5rem;
+
+    .button{
+        background-color: #FF5522;
+        font-size: 1.5rem;
+        width: 51.7rem;
+        height: 4.2rem;
+    
+    }
+    .button:hover{
+        background-color: #CC4400;
+    }
+}
+@media (max-width: 520px) {
+    .div{
+        width: 48rem;
+        .button{
+            width: 48rem;
+        }
+    }
+
+}
