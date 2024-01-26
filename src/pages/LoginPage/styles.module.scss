@@ -7,6 +7,7 @@
 
 }
 
+
 .imgLogin {
     height:99vh;
 
@@ -26,7 +27,7 @@
     align-items: center;
     .h1{
         text-align: center;
-
+        color: #222244;    
         font-size: 48px;
         font-style: normal;
     }
@@ -53,23 +54,10 @@
         padding-bottom: 0%;
         margin: 1rem;
         padding-top: 2rem;
+        color: #222244;
     }
 }
-@media (max-width: 970px) {
 
-    .main{
-        margin: auto;
-        gap: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
-    .imgLogin{
-        display: none;
-    }
-
-}
 @media (max-width: 1200px) {
     .main{
         gap: 15.3rem;
@@ -84,11 +72,18 @@
     }
 
 }
-@media (max-width: 590px) {
+@media (max-width: 970px) {
+
     .main{
         margin: auto;
         gap: 0;
-    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .imgLogin{
+        display: none;
     }
 
 }

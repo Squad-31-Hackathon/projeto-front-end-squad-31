@@ -15,7 +15,6 @@ export default function Login() {
   // const responseGoogle = (response) => {
   //   console.log(response)
   // }
-
   return (
 
     <div className={styles.main}> 
@@ -35,7 +34,7 @@ export default function Login() {
               <InputEmail children={"Email"}/>
               <InputPassword/>
               <UsButton children={"Entrar"}/>
-              <a href="">Cadastre-se</a>
+              <a href="../">Cadastre-se</a>
           </form>
           
         </div>
