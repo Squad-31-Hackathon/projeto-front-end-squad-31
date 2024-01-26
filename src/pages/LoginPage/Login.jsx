@@ -19,33 +19,28 @@ export default function Login() {
   return (
 
     <div className={styles.main}> 
-
-       <img src={imgLogin} alt='img Login' className={styles.imgLogin}/>
-
-       <div className={styles.formLogin}>
-
-       <h1>Entre no Orange Portfólio</h1>
-
-       {/* <div>
-        <GoogleLogin
-          clientId="558139726183-qi4m23hstlt06s64ettanukj4ks92ma8.apps.googleusercontent.com"
-          buttonText="Continuar com o google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-        />
-       </div> */}
-
-       <h2>Faça login com email</h2>
-
-        <InputEmail children={"Email"}/>
-
-        <InputPassword/>
-
-        <UsButton children={"Entrar"}/>
-
-        <a href="">Cadastre-se</a>
-
-       </div>
+      <div>
+        <img src={imgLogin} alt='img Login' className={styles.imgLogin}/>
+      </div>
+       
+      <div className={styles.fom}>
+        <div className={styles.formLogin}>
+          <p className={styles.h1}>Entre no Orange Portfólio</p>
+          <div>
+            <button className={styles.button}>google</button>
+          </div>
+          
+          <form>
+          <p className={styles.p}>Faça login com email</p>
+              <InputEmail children={"Email"}/>
+              <InputPassword/>
+              <UsButton children={"Entrar"}/>
+              <a href="">Cadastre-se</a>
+          </form>
+          
+        </div>
+      </div>
+       
 
     </div>
 
