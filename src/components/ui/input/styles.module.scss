@@ -49,12 +49,47 @@
         align-items: start; 
         .inputDuo{
   
+            width: 45rem;
+        } 
+    }
+    .div{
+        width: 45rem;
+        .input{
+            width: 45rem;
+        }
+    }
+}
+@media (max-width: 560px) {
+    .divDuo{
+        flex-direction: column;
+        align-items: start; 
+        .inputDuo{
+  
             width: 48rem;
         } 
     }
     .div{
         .input{
             width: 48rem;
+        }
+    }
+}
+@media (max-width: 412px) {
+    
+    .divDuo{
+        flex-direction: column;
+        align-items: start; 
+        .inputDuo{
+  
+            width: 20rem;
+        } 
+    }
+    .div{
+        .input{
+            display: flex;
+            height: 56px;
+            width: 37rem;
+
         }
     }
 }
