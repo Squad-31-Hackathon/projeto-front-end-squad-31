@@ -1,13 +1,10 @@
-import { UsHeader } from "./components/ui/header";
-import { InputEmail, InputNameAndLastName } from "./components/ui/input";
-import './global.css'
-import Login from "./pages/LoginPage/Login";
+import { AuthProvider } from "./contexts/auth";
+import { Routes } from "./routes";
 
-export default function App() {
-
+export function App() {
   return (
-    <>
-      <Login/>
-    </>
-  )
+    <AuthProvider>
+      <Routes />;
+    </AuthProvider>
+  );
 }

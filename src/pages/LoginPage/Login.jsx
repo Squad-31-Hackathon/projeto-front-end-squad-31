@@ -1,8 +1,8 @@
 import { UsButton } from "../../components/ui/button"
 import { InputEmail,InputPassword} from "../../components/ui/input"
-import * as React from 'react'
 import imgLogin from '../../assets/img_login.png'
 import styles from './styles.module.scss'
+
 // import GoogleLogin from 'react-google-login'
 
 
