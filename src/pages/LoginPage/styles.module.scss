@@ -1,7 +1,7 @@
 
 .main{
     display: flex;
-    gap: 25.3rem;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 
@@ -25,6 +25,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    margin-right: 20rem;
     .h1{
         text-align: center;
         color: #222244;    
@@ -58,21 +59,8 @@
     }
 }
 
-@media (max-width: 1200px) {
-    .main{
-        gap: 15.3rem;
-    
-    }
 
-}
-@media (max-width: 1085px) {
-    .main{
-        gap: 4.3rem;
-    
-    }
-
-}
-@media (max-width: 970px) {
+@media (max-width: 1050px) {
 
     .main{
         margin: auto;
@@ -80,6 +68,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        .formLogin{
+            margin-right: 0;
+        }
 
     }
     .imgLogin{
@@ -121,4 +112,29 @@
     }
 
 }
+@media (max-width: 360px) {
+    .main{
+        .formLogin {
+            margin-top: 8rem;   
 
+            p{
+                margin: auto;
+                text-align: center;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
+            }           
+
+            form{
+                display: flex;
+                margin-left: 6rem;
+                flex-direction: column;
+    
+  
+            }
+        }
+    
+    }
+
+}

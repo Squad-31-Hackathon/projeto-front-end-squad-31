@@ -22,12 +22,17 @@ export function AddModal() {
       >
         <div  className={styles.div}> 
             <div>
-
+                <p>Adicionar projeto</p>
             </div>
             <div>
                 <div>
                     <p>Selecione o conteúdo que você deseja fazer upload</p>
-                    <img src='../../../../public/semImagem.png'></img>
+                    <img className={styles.img} src='../../../../public/semImagem.png'></img>
+                </div>
+                <div>
+                  <form>
+                    
+                  </form>
                 </div>
             </div>
             <div>

@@ -2,7 +2,7 @@
 .main{
     display: flex;
     align-items: center;
-    gap: 25.3rem;
+    justify-content: space-between;
 }
 .fom{
 
@@ -21,6 +21,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-right: 20rem;
     p{
 
         text-align: center;
@@ -35,30 +36,21 @@
  
     }
 
-}
-
-@media (max-width: 1200px) {
-    .main{
-        gap: 15.3rem;
-    
-    }
 
 }
-@media (max-width: 1085px) {
-    .main{
-        gap: 4.0rem;
-    
-    }
 
-}
-@media (max-width: 975px) {
+
+@media (max-width: 1050px) {
 
     .main{
         margin: auto;
-        gap: 0;
+        margin-right: 0;
         display: flex;
         justify-content: center;
         align-items: center;
+        .formLogin{
+            margin-right: 0;
+        }
 
     }
     .imgRegister{
