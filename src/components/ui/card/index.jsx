@@ -8,11 +8,6 @@ import styles from './styles.module.scss'
 import CloseIcon from '@mui/icons-material/Close';
 
 
-function handleOpen(event) {
-    event.preventDefault();
-}
-  
-
 export default function DescobrirCard() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -25,7 +20,7 @@ export default function DescobrirCard() {
                     <CardActionArea  >
                         <CardContent>
                             <div className={styles.card}>
-                                <img className={styles.img} src='../../../../public/semImagem.png'></img> 
+                                <img className={styles.img} src="../../../../public/semImagem.png"></img> 
                             </div>
                             <div className={styles.perfil}>
                                 <Avatar className={styles.perImg}/>

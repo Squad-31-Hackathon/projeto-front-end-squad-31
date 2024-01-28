@@ -84,3 +84,8 @@
         cursor: pointer;
     }
 }
+@media (max-width: 412px) {
+    .tags{
+        width: 90%;
+    }
+}

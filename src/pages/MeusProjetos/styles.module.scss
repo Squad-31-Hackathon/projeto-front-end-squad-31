@@ -1,6 +1,7 @@
 
 .body{
-    margin: 6rem;
+    margin: 2rem;
+    margin-top: 12rem;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -11,6 +12,7 @@
     align-items: flex-start;
     gap: 2rem;
     margin-top: 1rem;
+
     .avatar{
         width: 12rem;
         height: 12rem;
@@ -31,6 +33,7 @@
     }
 }
 .midle{
+    width: 95%;
     align-self: flex-start;
     margin-top: 20px;
     p{
@@ -38,16 +41,104 @@
     }
 }
 .final{
-    align-self: flex-start;
-    button{
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    .img{
-        width: 25.9rem;
-        height: 18.6rem;
-        border-radius: 10px;
-        border: none;
-    }
+    width: 100%;
+    //background-color: red;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+
 }
+.final > div {
+   
+    margin-right: 10px;
+    margin-bottom: 90px;
+}
+@media (max-width: 860px) {
+
+    .final{
+        justify-content: center;
+    }
+ 
+ }
+@media (max-width: 860px) {
+
+    .midle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+ }
+ 
+ }
+ @media (max-width: 412px) {
+    .add{
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+        margin-top: 1rem;
+        .avatar{
+            width: 10rem;
+            height: 10rem;
+        }
+        .resto{
+            p{
+                margin-bottom: 1.5rem;
+            }
+            .pais{
+                font-size: 14px;
+                color: #0B0C0D;
+            }
+            .nome{
+                font-size: 22px;
+                color: #303133;
+            }
+            
+        }
+    }
+     .desc{
+         width: 90%;
+         p{  
+   
+             font-size: 14px;
+             text-align: center;
+         }
+     }
+     .midle{
+         margin-top: 5rem;
+         margin-bottom: 5rem;
+         width: 100%;
+         display: flex;
+         justify-content: flex-start;
+     }
+     .final{
+         display: flex;
+         align-items: center;
+         justify-content: center;
+     }
+ 
+ }
+     @media (max-width: 360px) {
+         .desc{
+             p{  
+                 width: 100%;
+                 font-size: 14px;
+                 text-align: center;
+             }
+         }
+         .midle{
+             margin-top: 5rem;
+             margin-bottom: 5rem;
+             width: 100%;
+             display: flex;
+             justify-content: flex-start;
+         }
+         .final{
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+     
+     
+ }
+ 

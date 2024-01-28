@@ -1,7 +1,7 @@
 import { Avatar } from "@mui/material";
 import { UsHeader } from "../../components/ui/header";
 import styles from './styles.module.scss'
-import { AddModal } from "../../components/ui/modalAdd";
+import { AddModal, ButtonModal } from "../../components/ui/modalAdd";
 import { InputNormal } from "../../components/ui/input";
 
 export function MeusProjetos() {
@@ -27,7 +27,9 @@ export function MeusProjetos() {
           <InputNormal children={"Buscar tags"}/>
         </div>
         <div className={styles.final}>
-          <button><img className={styles.img} src='../../../../public/add.png'></img></button>
+          <ButtonModal/>
+          <ButtonModal/>
+          <ButtonModal/>
         </div>
       </div>
       
