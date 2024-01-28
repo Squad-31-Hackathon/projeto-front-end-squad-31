@@ -1,3 +1,4 @@
+import DescobrirCard from "./components/ui/card";
 import { UsHeader } from "./components/ui/header";
 import { InputEmail, InputNameAndLastName, TextInput } from "./components/ui/input";
 import { AddModal } from "./components/ui/modalAdd";
@@ -9,7 +10,7 @@ export default function App() {
 
   return (
     <>
-     <AddModal/>
+     <DescobrirCard/>
     </>
   )
 }

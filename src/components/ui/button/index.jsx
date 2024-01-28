@@ -20,10 +20,14 @@ export function AddButton({children}){
 
     )
 }
-export function DisButton({children}){
+export function DisButton({children, handleClose}){
+ 
+    const handleClick = () => {
+        handleClose(); 
+    }
     return(  
         <div className={styles.divDis}>
-            <button className={styles.buttonDis} variant="contained">{children}</button>
+            <button className={styles.buttonDis} variant="contained" onClick={handleClick}>{children}</button>
         </div>    
 
     )

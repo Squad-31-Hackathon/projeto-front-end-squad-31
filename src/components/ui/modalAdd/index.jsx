@@ -47,7 +47,7 @@ export function AddModal() {
                 </div>
                 <div className={styles.buttons}>
                   <AddButton children={'ENVIAR'}/>
-                  <DisButton children={'CANCELAR'}/>
+                  <DisButton children={'CANCELAR'} handleClose={handleClose}/>
                 </div>
             </div>
         </div>
