@@ -41,7 +41,7 @@ export function Tag() {
             </div>
             {tags.map((tag, index) => (
                 <div className={styles.tagsItens} key={index}>
-                    <span>{tag}</span>
+                    <span className={styles.text}>{tag}</span>
                     <span className={styles.close} onClick={() => removeTag(index)}>&times;</span>
                 </div>
             ))}

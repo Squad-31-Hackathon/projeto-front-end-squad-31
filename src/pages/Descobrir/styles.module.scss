@@ -1,0 +1,20 @@
+.body{
+    margin: 6rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+ 
+}
+.desc{
+    p{  
+        width: 500px;
+        font-size: 22px;
+        text-align: center;
+    }
+}
+.midle{
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
