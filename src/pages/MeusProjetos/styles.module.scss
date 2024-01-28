@@ -1,0 +1,53 @@
+
+.body{
+    margin: 6rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+ 
+}
+.add{
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 1rem;
+    .avatar{
+        width: 12rem;
+        height: 12rem;
+    }
+    .resto{
+        p{
+            margin-bottom: 1.5rem;
+        }
+        .pais{
+            font-size: 16px;
+            color: #0B0C0D;
+        }
+        .nome{
+            font-size: 24px;
+            color: #303133;
+        }
+        
+    }
+}
+.midle{
+    align-self: flex-start;
+    margin-top: 20px;
+    p{
+        margin: 10px;
+    }
+}
+.final{
+    align-self: flex-start;
+    button{
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .img{
+        width: 25.9rem;
+        height: 18.6rem;
+        border-radius: 10px;
+        border: none;
+    }
+}

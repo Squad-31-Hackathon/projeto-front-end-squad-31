@@ -10,22 +10,26 @@ export default function Register() {
   return (
 
     <div className={styles.main}> 
+      <div>
+        <img src={imgRegister} alt='img Register' className={styles.imgRegister}/>
+      </div>
 
-       <img src={imgRegister} alt='img Register' className={styles.imgRegister}/>
+      <div className={styles.fom}>
+        <div className={styles.formLogin}>
+          <p>Cadastre-se</p>
+            <form>
+            <InputNameAndLastName name={"Nome"} lastName={"Sobrenome"}/>
 
-       <div className={styles.formLogin}>
+            <InputEmail children={"Email"}/>
 
-       <h1>Cadastre-se</h1>
+            <InputPassword/>
 
-       <InputNameAndLastName name={"Nome"} lastName={"Sobrenome"}/>
+            <UsButton children={"Cadastrar"}/>
+            </form>
 
-        <InputEmail children={"Email"}/>
-
-        <InputPassword/>
-
-        <UsButton children={"Cadastrar"}/>
-
-       </div>
+        </div>
+      </div>
+       
 
     </div>
 

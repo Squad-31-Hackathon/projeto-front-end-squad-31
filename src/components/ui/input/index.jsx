@@ -54,3 +54,34 @@ export function InputPassword(){
 
     )
 }
+export function InputNormal({children}){
+    return(      
+       
+        
+            <div className={styles.divadd}>
+            <TextField
+                className={styles.input}
+                id="outlined-required"
+                label={children}
+            />
+            </div>
+  
+    )
+}
+export function TextInput({children}){
+    return(      
+       
+        
+            <div className={styles.divadd}>
+            <TextField
+                className={styles.input}
+                id="outlined-multiline-static"
+                label="Multiline"
+                multiline
+                rows={4}
+                defaultValue="Descrição"
+        />
+            </div>
+  
+    )
+}

@@ -38,7 +38,7 @@ export function UsHeader() {
   
     return (
     <header className={styles.header}>
-        <AppBar className={styles.bar} position="static">
+        <AppBar className={styles.bar}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
 
@@ -50,7 +50,6 @@ export function UsHeader() {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
                 color: 'inherit',
@@ -136,14 +135,14 @@ export function UsHeader() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <div className={styles.gap}>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-                <IconButton
-                    color="inherit"
-                >
-                    <NotificationsIcon className={styles.not} />
-                </IconButton>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar className={styles.avatar} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                  <IconButton
+                      color="inherit"
+                  >
+                  <NotificationsIcon className={styles.not} />
+                  </IconButton>
                 </div>
                 
               </Tooltip>
