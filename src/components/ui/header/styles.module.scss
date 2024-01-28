@@ -6,7 +6,8 @@
 
 
 
-.header{
+.header{    
+
     .bar{
         background-color: #111133;
     }
@@ -36,3 +37,15 @@
 }
 
 
+@media (max-width: 412px) {
+    .gap{
+        .avatar{
+            width: 3rem;
+            height: 3rem;
+        }
+        .not{
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}

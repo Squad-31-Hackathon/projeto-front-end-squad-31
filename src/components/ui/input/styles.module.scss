@@ -112,6 +112,28 @@
 
         }
     }
+    .divadd{
+        margin: 1rem;
+        margin-bottom: 1.6rem;
+        margin-top: 1.6rem;
+        font-size: 1.6rem;
+        width: 90%;
+        .input{
+            width: 100%;
+            height: 4.6rem;
+            margin-bottom: 5px;
+            input{
+                font-size: 1.6rem;
+            }
+            label{
+                font-size: 1.6rem;
+                background-color: #fff;
+            }
+            div{
+                font-size: 1.6rem;  
+            }
+        }
+    }
 }
 @media (max-width: 360px) {
     

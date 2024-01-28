@@ -67,7 +67,24 @@ export default function DescobrirCard() {
                         </div>
                         <div className={styles.midle} >
                           
-                            <img className={styles.img} src='../../../../public/semImagem.png'></img>  
+                            <img className={styles.img} src='../../../../public/semImagem.png'></img>
+                            <div className={styles.resp}>
+                                <div className={styles.perfil}>
+                                    <div>
+                                        <Avatar className={styles.avatar} />
+                                    </div>
+                                    <div className={styles.text}>
+                                        <p>Nome Sobrenome</p>
+                                        <FiberManualRecordIcon className={styles.ponto}/>
+                                        <p>02/24</p>
+                                    </div>
+                                    
+                                </div>
+                                <div className={styles.tags}>
+                                        <span>Tag1</span>
+                                        <span>Tag2</span>
+                                    </div>
+                            </div>  
 
                         </div>
                         <div className={styles.final}>
