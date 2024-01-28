@@ -1,3 +1,4 @@
+import DescobrirCard from '../../components/ui/card';
 import { UsHeader } from '../../components/ui/header';
 import { InputNormal } from '../../components/ui/input';
 import styles from './styles.module.scss';
@@ -24,7 +25,11 @@ export function Descobrir() {
       
       </div>
       <div className={styles.final}>
-        <button></button>
+        <div><DescobrirCard/></div>
+        <div><DescobrirCard/></div>
+        <div><DescobrirCard/></div>
+        <div><DescobrirCard/></div>
+
       </div>
     </div>
     

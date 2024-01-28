@@ -10,7 +10,7 @@ import { Descobrir } from "./pages/Descobrir";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <Descobrir/>
   </React.StrictMode>,
  document.getElementById('root')
 );

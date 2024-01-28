@@ -90,3 +90,44 @@
 
 }
 
+
+.button{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    border: none;
+    width: 28.9rem;
+    height: 19rem;
+    .cart{
+        div{
+            padding: 0;
+        }
+        .img{
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 0;
+            padding: 0;
+        }
+        .perfil{
+            display: flex;
+            align-items: center;
+            gap:5px;
+            .perImg{
+                width: 3rem;
+                height: 3rem;
+            }
+            .ponto{
+                width: 5px;
+            }
+            p{
+                font-size: 10px;
+            }
+
+            margin-bottom: 5px;
+        }
+    }
+}
+
+

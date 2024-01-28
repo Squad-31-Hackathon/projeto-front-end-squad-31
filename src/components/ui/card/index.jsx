@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Avatar, CardActionArea } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import styles from './styles.module.scss'
@@ -21,17 +20,19 @@ export default function DescobrirCard() {
 
   return (
             <div>
-                <button onClick={handleOpen}>
-                    <Card sx={{ maxWidth: 345 }}  >
+                <button className={styles.button} onClick={handleOpen}>
+                    <Card className={styles.cart}>
                     <CardActionArea  >
                         <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Lizard
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                            species, ranging across all continents except Antarctica
-                        </Typography>
+                            <div className={styles.card}>
+                                <img className={styles.img} src='../../../../public/semImagem.png'></img> 
+                            </div>
+                            <div className={styles.perfil}>
+                                <Avatar className={styles.perImg}/>
+                                <p>Nome Sobrenome</p>
+                                <FiberManualRecordIcon className={styles.ponto}/>
+                                <p>02/24</p>
+                            </div>
                         </CardContent>
                     </CardActionArea>
                     </Card>
