@@ -3,6 +3,9 @@ import Button from '@mui/material/Button';
 
 import Modal from '@mui/material/Modal';
 import styles from './styles.module.scss'
+import { InputNormal, TextInput } from '../input';
+import { Tag } from '../tag';
+import { AddButton, DisButton } from '../button';
 
 
 
@@ -13,7 +16,7 @@ export function AddModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <button className={styles.prime} onClick={handleOpen}>ADICIONAR PROJETO</button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -21,25 +24,31 @@ export function AddModal() {
         aria-describedby="modal-modal-description"
       >
         <div  className={styles.div}> 
-            <div>
+            <div className={styles.title}>
                 <p>Adicionar projeto</p>
             </div>
-            <div>
-                <div>
+            <div className={styles.midle} >
+                <div className={styles.textImg}>
                     <p>Selecione o conteúdo que você deseja fazer upload</p>
-                    <img className={styles.img} src='../../../../public/semImagem.png'></img>
+                    <button><img className={styles.img} src='../../../../public/semImagem.png'></img></button>   
                 </div>
-                <div>
+                <div className={styles.form}>
                   <form>
-                    
+                    <InputNormal children={"Título"}/>
+                    <Tag/>
+                    <InputNormal children={"Link"}/>
+                    <TextInput/>
                   </form>
                 </div>
             </div>
-            <div>
-
-            </div>
-            <div>
-
+            <div className={styles.final}>
+                <div>
+                  <p>Visualizar publicação</p>
+                </div>
+                <div className={styles.buttons}>
+                  <AddButton children={'ENVIAR'}/>
+                  <DisButton children={'CANCELAR'}/>
+                </div>
             </div>
         </div>
         

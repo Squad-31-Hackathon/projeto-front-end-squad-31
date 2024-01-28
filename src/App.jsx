@@ -1,5 +1,5 @@
 import { UsHeader } from "./components/ui/header";
-import { InputEmail, InputNameAndLastName } from "./components/ui/input";
+import { InputEmail, InputNameAndLastName, TextInput } from "./components/ui/input";
 import { AddModal } from "./components/ui/modalAdd";
 import {Tag} from "./components/ui/tag";
 import './global.scss'
@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <>
-     <Tag/>
+     <AddModal/>
     </>
   )
 }

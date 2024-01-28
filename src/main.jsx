@@ -9,7 +9,7 @@ import { MeusProjetos } from "./pages/MeusProjetos";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <MeusProjetos/>
   </React.StrictMode>,
  document.getElementById('root')
 );

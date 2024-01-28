@@ -58,7 +58,7 @@ export function InputNormal({children}){
     return(      
        
         
-            <div className={styles.div}>
+            <div className={styles.divadd}>
             <TextField
                 className={styles.input}
                 id="outlined-required"
@@ -72,14 +72,14 @@ export function TextInput({children}){
     return(      
        
         
-            <div className={styles.div}>
+            <div className={styles.divadd}>
             <TextField
                 className={styles.input}
                 id="outlined-multiline-static"
                 label="Multiline"
                 multiline
                 rows={4}
-                defaultValue="Default Value"
+                defaultValue="Descrição"
         />
             </div>
   

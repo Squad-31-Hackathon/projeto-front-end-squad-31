@@ -37,7 +37,7 @@ export function Tag() {
                     className={styles.input}
                     required
                 />
-                <label>Tag</label>
+                <label>Tags</label>
             </div>
             {tags.map((tag, index) => (
                 <div className={styles.tagsItens} key={index}>

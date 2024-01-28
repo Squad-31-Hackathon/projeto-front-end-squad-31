@@ -12,3 +12,19 @@ export function UsButton({children}){
 
     )
 }
+export function AddButton({children}){
+    return(  
+        <div className={styles.divAdd}>
+            <Button className={styles.buttonAdd} variant="contained">{children}</Button>
+        </div>    
+
+    )
+}
+export function DisButton({children}){
+    return(  
+        <div className={styles.divDis}>
+            <button className={styles.buttonDis} variant="contained">{children}</button>
+        </div>    
+
+    )
+}
