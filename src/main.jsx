@@ -1,12 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-
+import ReactDOM from "react-dom";
 import { Routes } from "./routes";
-
 import "./global.scss";
+import Login from "./pages/LoginPage/Login";
+import Register from "./pages/RegisterPage/Register";
+import App from "./App";
+import { MeusProjetos } from "./pages/MeusProjetos";
+import { Descobrir } from "./pages/Descobrir";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.render(
   <React.StrictMode>
-      <Routes />
-  </React.StrictMode>
+    <MeusProjetos/>
+  </React.StrictMode>,
+ document.getElementById('root')
 );
