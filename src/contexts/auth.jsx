@@ -1,19 +1,26 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { api } from "../services/api";
 
 const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
-  async function AuthLogin(email, password) {
+function AuthProvider({ children }) {
+  async function authLogin(email, password) {
     const response = await api.post("/auth/login", { email, password });
-    return response.data;
+    console.log(response);
+    return response.data
   }
 
   return (
-    <AuthContext.Provider value={{ signed: false, AuthLogin }}>
+    <AuthContext.Provider value={{ authLogin }}>
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export default AuthContext;
+function useAuth() {
+  const context = useContext(AuthContext);
+
+  return context;
+}
+
+export { AuthProvider, useAuth };
