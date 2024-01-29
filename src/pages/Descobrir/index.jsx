@@ -13,7 +13,12 @@ export function Descobrir() {
         console.error("deu erro" + err);
       });
   }, []);
+
   return (
-    <div>Descobrir</div>
+    
+    <div>
+      Descobrir
+      <p>Usuario: {user?.name}</p>
+    </div>
   )
 }
