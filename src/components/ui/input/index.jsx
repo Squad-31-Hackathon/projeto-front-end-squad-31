@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 
 
-export function InputEmail({children}){
+export function InputEmail({children, funcButton}){
     return(      
        
         
@@ -14,6 +14,7 @@ export function InputEmail({children}){
                 className={styles.input}
                 id="outlined-required"
                 label={children}
+                onChange={funcButton}
             />
             </div>
   
@@ -38,7 +39,7 @@ export function InputNameAndLastName({name,lastName}){
 
     )
 }
-export function InputPassword(){
+export function InputPassword({funcButton}){
     return(      
        
      
@@ -49,6 +50,7 @@ export function InputPassword(){
                 label="Password"
                 type="password"
                 autoComplete="current-password"
+                onChange={funcButton}
             />
             </div>
 

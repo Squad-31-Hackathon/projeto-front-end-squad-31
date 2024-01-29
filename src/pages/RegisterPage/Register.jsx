@@ -12,18 +12,23 @@ export default function Register() {
 
   const [formData, setFormData] = useState({})
 
-  useEffect(() => {
-    api.post('https://api-squad-31-50ec80afc789.herokuapp.com/auth/register', {
-      name: "Desesperador",
-      lastName: "MeAjudaDeus",
-      email: 'jogadordelol@gmail.com',
-      password: 'funcionaporfavor'
-    })
-      .then((response) => setFormData(response.data))
-      .catch((err) => {
-        console.error("deu erro" + err);
-      });
-  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await api.post('https://api-squad-31-50ec80afc789.herokuapp.com/auth/register', formData);
+      console.log('Registro bem-sucedido');
+      // Faça algo com a resposta, como redirecionar o usuário para a página de login ou exibir uma mensagem de sucesso.
+    } catch (error) {
+      console.error('Erro ao registrar:', error);
+      
+      // Lide com o erro, como exibir uma mensagem de erro para o usuário.
+    }
+  };
 
   return (
 
@@ -35,13 +40,38 @@ export default function Register() {
 
         <h1>Cadastre-se</h1>
 
-        <InputNameAndLastName name={"Nome"} lastName={"Sobrenome"} />
-
-        <InputEmail children={"Email"} />
-
-        <InputPassword />
-
-        <UsButton children={"Cadastrar"} type="submit"/>
+        <form onSubmit={handleSubmit}>
+          {/* <InputNameAndLastName
+            name="name"
+            lastName="lastName"
+            value={formData.name}
+            onChange={handleChange}
+          /> */}
+          <InputEmail
+            children="nome"
+            name="name"
+            value={formData.name}
+            funcButton={handleChange}
+          />
+          <InputEmail
+            children="sobrenome"
+            name="surname"
+            value={formData.surname}
+            funcButton={handleChange}
+          />
+          <InputEmail
+            children="email"
+            name="email"
+            value={formData.email}
+            funcButton={handleChange}
+          />
+          <InputPassword
+            name="password"
+            value={formData.password}
+            funcButton={handleChange}
+          />
+          <UsButton type="submit">Cadastrar</UsButton>
+        </form>
 
       </div>
 
