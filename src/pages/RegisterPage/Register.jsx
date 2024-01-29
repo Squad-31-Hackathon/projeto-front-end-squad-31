@@ -14,10 +14,10 @@ export default function Register() {
 
   useEffect(() => {
     api.post('https://api-squad-31-50ec80afc789.herokuapp.com/auth/register', {
-      name: "test",
-      lastName: "test",
-      email: 'testeemaildenovoNOVO@gmail.com',
-      password: '1234'
+      name: "Desesperador",
+      lastName: "MeAjudaDeus",
+      email: 'jogadordelol@gmail.com',
+      password: 'funcionaporfavor'
     })
       .then((response) => setFormData(response.data))
       .catch((err) => {
