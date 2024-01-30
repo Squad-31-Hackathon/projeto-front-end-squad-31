@@ -9,10 +9,25 @@ import { AddButton, DisButton } from '../button';
 
 
 
+
 export function AddModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [imageSrc, setImageSrc] = React.useState('');
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
 
   return (
     <div>
@@ -28,10 +43,25 @@ export function AddModal() {
                 <p>Adicionar projeto</p>
             </div>
             <div className={styles.midle} >
-                <div className={styles.textImg}>
-                    <p>Selecione o conteúdo que você deseja fazer upload</p>
-                    <button><img className={styles.img} src='../../../../public/semImagem.png'></img></button>   
-                </div>
+            <label className={`${styles.textImg} ${imageSrc && styles.whiteBackground}`} tabIndex="0">
+              <input 
+                id='addImg' 
+                type="file" 
+                accept='image/*' 
+                className={styles.img} 
+                onChange={handleImageChange} 
+              />
+              <div id="imgText">
+                {imageSrc ? (
+                  <img src={imageSrc} alt="Selected" className={styles.selectedImage} />
+                ) : (
+                  <span className={styles.textoInput}>
+                    <span>Selecione uma imagem</span>
+                    <span className="icon">Ícone Aqui</span>
+                  </span>
+                )}
+              </div>  
+          </label>
                 <div className={styles.form}>
                   <form>
                     <InputNormal children={"Título"}/>
@@ -60,6 +90,18 @@ export function ButtonModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [imageSrc, setImageSrc] = React.useState('');
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div>
@@ -75,10 +117,25 @@ export function ButtonModal() {
                 <p>Adicionar projeto</p>
             </div>
             <div className={styles.midle} >
-                <div className={styles.textImg}>
-                    <p>Selecione o conteúdo que você deseja fazer upload</p>
-                    <button><img className={styles.img} src='../../../../public/semImagem.png'></img></button>   
-                </div>
+            <label className={`${styles.textImg} ${imageSrc && styles.whiteBackground}`} tabIndex="0">
+              <input 
+                id='addImg' 
+                type="file" 
+                accept='image/*' 
+                className={styles.img} 
+                onChange={handleImageChange} 
+              />
+              <div id="imgText">
+                {imageSrc ? (
+                  <img src={imageSrc} alt="Selected" className={styles.selectedImage} />
+                ) : (
+                  <span className={styles.textoInput}>
+                    <span>Selecione uma imagem</span>
+                    <span className="icon">Ícone Aqui</span>
+                  </span>
+                )}
+              </div>  
+          </label>
                 <div className={styles.form}>
                   <form>
                     <InputNormal children={"Título"}/>

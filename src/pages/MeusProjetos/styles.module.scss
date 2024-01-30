@@ -12,7 +12,6 @@
     align-items: flex-start;
     gap: 2rem;
     margin-top: 1rem;
-
     .avatar{
         width: 12rem;
         height: 12rem;
@@ -71,7 +70,7 @@
  }
  
  }
- @media (max-width: 412px) {
+ @media (max-width: 425px) {
     .add{
         display: flex;
         align-items: flex-start;
