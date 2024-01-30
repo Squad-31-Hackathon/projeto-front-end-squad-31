@@ -11,17 +11,22 @@ import { useState, useEffect } from "react"
 export default function Register() {
 
   const [formData, setFormData] = useState({})
+  
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+
+  const handleChange = (e, name) => {
+    
+    const { value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     try {
-      await api.post('https://api-squad-31-50ec80afc789.herokuapp.com/auth/register', formData);
+      await api.post('/auth/register', formData);
       console.log('Registro bem-sucedido');
+      debugger
       // Faça algo com a resposta, como redirecionar o usuário para a página de login ou exibir uma mensagem de sucesso.
     } catch (error) {
       console.error('Erro ao registrar:', error);
@@ -51,24 +56,24 @@ export default function Register() {
             children="nome"
             name="name"
             value={formData.name}
-            funcButton={handleChange}
+            funcButton={e => handleChange(e,"name")}
           />
           <InputEmail
             children="sobrenome"
-            name="surname"
+            name="lastName"
             value={formData.surname}
-            funcButton={handleChange}
+            funcButton={e => handleChange(e,"lastName")}
           />
           <InputEmail
             children="email"
             name="email"
             value={formData.email}
-            funcButton={handleChange}
+            funcButton={e => handleChange(e,"email")}
           />
           <InputPassword
             name="password"
             value={formData.password}
-            funcButton={handleChange}
+            funcButton={ e => handleChange(e,"password")}
           />
           <UsButton type="submit">Cadastrar</UsButton>
         </form>

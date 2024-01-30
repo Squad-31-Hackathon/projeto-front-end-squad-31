@@ -39,10 +39,9 @@ export function InputNameAndLastName({name,lastName}){
 
     )
 }
-export function InputPassword({funcButton}){
+export function InputPassword({funcButton, nameInput}){
     return(      
        
-     
         <div className={styles.div}>
         <TextField
             className={styles.input}
