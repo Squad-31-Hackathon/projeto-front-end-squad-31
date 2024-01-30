@@ -12,7 +12,7 @@ function AuthProvider({ children }) {
       const {user, token } = response.data;
 
       //localStorage.setItem("user", JSON.stringify(user))
-      //localStorage.setItem("token", token)
+      localStorage.setItem("token", token)
 
       api.defaults.headers.authorization = `Bearer ${token}`;
       setData({ user, token });
@@ -20,7 +20,7 @@ function AuthProvider({ children }) {
       console.log(response);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
+        console.log("Não foi possivel entrar",error.response.data.message);
       } else {
         console.log("Não foi possivel entrar");
       }
@@ -32,7 +32,7 @@ function AuthProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ authLogin, user: data.user }}>
+    <AuthContext.Provider value={{ authLogin, user: data.token }}>
       {children}
     </AuthContext.Provider>
   );

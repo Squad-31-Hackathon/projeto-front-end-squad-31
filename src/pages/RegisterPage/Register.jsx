@@ -18,18 +18,20 @@ export default function Register() {
     
     const { value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData)
   };
 
   const handleSubmit = async (e) => {
     
     e.preventDefault();
     try {
-      await api.post('/auth/register', formData);
-      console.log('Registro bem-sucedido');
-      debugger
+      const response = await api.post('/auth/register', formData);
+      console.log('Registro bem-sucedido', response.data);
       // Faça algo com a resposta, como redirecionar o usuário para a página de login ou exibir uma mensagem de sucesso.
     } catch (error) {
-      console.error('Erro ao registrar:', error);
+        if(error.response){
+          console.error('Erro ao registrar:', error.response.data);
+        }
       
       // Lide com o erro, como exibir uma mensagem de erro para o usuário.
     }
