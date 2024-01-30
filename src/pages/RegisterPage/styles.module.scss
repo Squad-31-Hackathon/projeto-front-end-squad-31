@@ -70,12 +70,16 @@
     }
 
 }
-@media (max-width: 412px) {
+@media (max-width: 425px) {
     .main{
         margin: auto;
+        .fom{
+            width: 100%;
+        }
         .formLogin {
             margin-top: 12rem;
-            width: 360px;
+            width: 100%;
+
             p{
                 margin: auto;
                 text-align: center;
@@ -88,7 +92,7 @@
 
             form{
                 display: flex;
-                width: 400px;
+                width: 90%;
                 height: 128px;
                 flex-direction: column;
                 flex-shrink: 0;
@@ -101,12 +105,10 @@
 @media (max-width: 360px) {
     .main{
         margin: 2rem;
-        .fom{
-            margin-top: 12rem;  
-        }
+  
         .formLogin {
             margin-top: 12rem;   
-            margin: 2rem;
+
 
             p{
                 margin: auto;
@@ -119,7 +121,6 @@
 
             form{
                 display: flex;
-                margin-left: 6rem;
                 flex-direction: column;
     
   

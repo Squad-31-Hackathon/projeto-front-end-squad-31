@@ -83,13 +83,13 @@
 
 }
 
-@media (max-width: 412px) {
+@media (max-width: 425px) {
     
     .div{
         .button{
             display: flex;
             height: 56px;
-            width: 37rem;
+            width: 100%;
 
         }
     }
@@ -97,11 +97,10 @@
 @media (max-width: 360px) {
     
     .div{
-        width: 35rem;
         .button{
             display: flex;
             height: 56px;
-            width: 32.2rem;
+            width: 100%;
 
         }
     }

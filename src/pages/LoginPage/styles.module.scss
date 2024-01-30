@@ -9,12 +9,13 @@
 
 
 .imgLogin {
-    height:99vh;
+    height:100vh;
 
 }
 .fom{
-
-    margin-top: 12rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 
 
 }
@@ -68,6 +69,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        .fom{
+            margin-top: 10rem;
+        }
         .formLogin{
             margin-right: 0;
         }
@@ -78,15 +82,16 @@
     }
 
 }
-@media (max-width: 412px) {
+@media (max-width: 425px) {
     .main{
         margin: auto;
+
         .formLogin {
 
             .h1{
                 margin: auto;
                 text-align: center;
-                font-size: 24px;
+                font-size: 22px;
                 font-style: normal;
                 font-weight: 400;
                 line-height: 24px;
@@ -102,7 +107,7 @@
             }
             form{
                 display: flex;
-                width: 400px;
+                width: 90%;
                 height: 128px;
                 flex-direction: column;
                 flex-shrink: 0;
@@ -127,8 +132,9 @@
             }           
 
             form{
+                width: 90%;
+                height: 100%;
                 display: flex;
-                margin-left: 6rem;
                 flex-direction: column;
     
   

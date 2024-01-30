@@ -1,5 +1,5 @@
 .tags {
-    width: 40.7rem;
+    width: 95%;
     height: 5rem;
     margin: 1rem;
     margin-bottom: 1.6rem;
@@ -82,5 +82,10 @@
         margin-left: 1.2rem;
         font-size: 18px;
         cursor: pointer;
+    }
+}
+@media (max-width: 425px) {
+    .tags{
+        width: 90%;
     }
 }
