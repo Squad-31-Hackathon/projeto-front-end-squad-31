@@ -1,5 +1,6 @@
 import { api } from "../../services/api"
 import { useState, useEffect } from "react"
+import { UsHeader } from "../../components/ui/header";
 
 export function MeusProjetos() {
 
@@ -16,6 +17,7 @@ export function MeusProjetos() {
 
   return (
     <div>
+      <UsHeader />
       Meus Projetos
       <p>Usuario: {user?.name}</p>
     </div>

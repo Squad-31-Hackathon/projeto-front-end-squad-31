@@ -1,5 +1,6 @@
 import { api } from "../../services/api"
 import { useState, useEffect } from "react"
+import { UsHeader } from "../../components/ui/header";
 
 export function Descobrir() {
 
@@ -17,6 +18,7 @@ export function Descobrir() {
   return (
     
     <div>
+      <UsHeader />
       Descobrir
       <p>Usuario: {user?.name}</p>
     </div>

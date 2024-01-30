@@ -20,14 +20,6 @@ export default function Login() {
     authLogin({ email, password });
   }
 
-  // const [name, setName] = useState()
-  // const [email, setEmail] = useState()
-  // const [profilePic, setProfilePic] = useState()
-  // const [isLoggedIn, setIsLogedIn] = useState()
-  // const responseGoogle = (response) => {
-  //   console.log(response)
-  // }
-
   return (
     <div className={styles.main}>
       <div>
@@ -45,10 +37,14 @@ export default function Login() {
             <p className={styles.p}>Faça login com email</p>
             <InputEmail
               children={"Email"}
-              onChance={(e) => setEmail(e.target.value)}
+              value={email}
+              funcButton={(e) => setEmail(e.target.value)}
             />
-            <InputPassword onChance={(e) => setPassword(e.target.value)} />
-            <UsButton children={"Entrar"} onClick={handleAuthLogin} />
+            <InputPassword
+              value={password}
+              funcButton={(e) => setPassword(e.target.value)}
+            />
+            <UsButton onClick={handleAuthLogin} children={"Entrar"} />
 
             <Link to="/register">Cadastre-se</Link>
           </form>
