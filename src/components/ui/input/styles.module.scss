@@ -3,7 +3,6 @@
     align-items: center;
     margin: 1rem;
     gap: 1.6rem;
-    width: 51.7rem;
     .inputDuo{
         width: 25.05rem ;
         height: 5.6rem;
@@ -40,8 +39,43 @@
         }
     }
 }
+.divadd,.divad{
+    margin: 1rem;
+    margin-bottom: 1.6rem;
+    margin-top: 1.6rem;
+    font-size: 1.6rem;
+    .input,.inputad{
+        width: 40.7rem;
+        height: 4.6rem;
+        margin-bottom: 5px;
+        input{
+            font-size: 1.6rem;
+        }
+        label{
+            font-size: 1.6rem;
+            background-color: #fff;
+        }
+        div{
+            font-size: 1.6rem;  
+        }
+    }
+}
 
-
+@media (max-width: 560px) {
+    .divDuo{
+        flex-direction: column;
+        align-items: start; 
+        .inputDuo{
+  
+            width: 45rem;
+        } 
+    }
+    .div{
+        .input{
+            width: 45rem;
+        }
+    }
+}
 
 @media (max-width: 520px) {
     .divDuo{
@@ -49,46 +83,78 @@
         align-items: start; 
         .inputDuo{
   
-            width: 45rem;
+            width: 42rem;
         } 
     }
     .div{
-        width: 45rem;
+
         .input{
-            width: 45rem;
+            width: 42rem;
         }
     }
 }
-@media (max-width: 560px) {
-    .divDuo{
-        flex-direction: column;
-        align-items: start; 
-        .inputDuo{
-  
-            width: 48rem;
-        } 
-    }
-    .div{
-        .input{
-            width: 48rem;
-        }
-    }
-}
-@media (max-width: 412px) {
+
+@media (max-width: 425px) {
     
     .divDuo{
         flex-direction: column;
         align-items: start; 
         .inputDuo{
   
-            width: 20rem;
+            width: 100%;
         } 
     }
     .div{
         .input{
             display: flex;
             height: 56px;
-            width: 37rem;
+            width: 100%;
+
+        }
+    }
+    .divadd{
+        margin: 1rem;
+        margin-bottom: 1.6rem;
+        margin-top: 1.6rem;
+        font-size: 1.6rem;
+        width: 90%;
+        .inputad{
+            width: 100%;
+        }
+        .input{
+            width: 100%;
+            height: 4.6rem;
+            margin-bottom: 5px;
+            input{
+                font-size: 1.6rem;
+            }
+            label{
+                font-size: 1.6rem;
+                background-color: #fff;
+            }
+            div{
+                font-size: 1.6rem;  
+            }
+        }
+    }
+}
+@media (max-width: 360px) {
+    
+    .divDuo{
+        flex-direction: column;
+        align-items: start; 
+
+        .inputDuo{
+  
+            width: 100%;
+        } 
+    }
+    .div{
+
+        .input{
+            display: flex;
+            height: 56px;
+            width: 100%;
 
         }
     }

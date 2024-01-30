@@ -37,9 +37,10 @@ export default function Register() {
 
   return (
 
-    <div className={styles.main}>
-
-      <img src={imgRegister} alt='img Register' className={styles.imgRegister} />
+    <div className={styles.main}> 
+      <div>
+        <img src={imgRegister} alt='img Register' className={styles.imgRegister}/>
+      </div>
 
       <div className={styles.formLogin}>
 

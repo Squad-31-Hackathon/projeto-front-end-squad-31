@@ -1,0 +1,93 @@
+.body{
+    margin-top: 15rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+ 
+}
+.desc{
+    width: 40%;
+    display:flex ;    
+    align-items: center;
+    justify-content: center;
+    p{  
+        font-size: 22px;
+        text-align: center;
+    }
+}
+.midle{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    margin-left: 10rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+.final{
+    width: 100%;
+    //background-color: red;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+.final > div {
+   
+    margin-right: 10px;
+    margin-bottom: 90px;
+}
+@media (max-width: 614px) {
+
+   .midle{
+    margin-left: 0;
+    justify-content: center;
+}
+
+}
+@media (max-width: 425px) {
+    .desc{
+        width: 90%;
+        p{  
+  
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+    .midle{
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .final{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+    @media (max-width: 360px) {
+        .desc{
+            p{  
+                width: 100%;
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+        .midle{
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .final{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+    
+}
