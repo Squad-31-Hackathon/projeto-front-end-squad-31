@@ -5,12 +5,13 @@ import { AddModal } from "./components/ui/modalAdd";
 import {Tag} from "./components/ui/tag";
 import './global.scss'
 import Login from "./pages/LoginPage/Login";
+import { AuthProvider } from "./contexts/auth";
+import { Routes } from "./routes";
 
 export default function App() {
-
   return (
-    <>
-     <Descobrir/>
-    </>
-  )
+    <AuthProvider>
+      <Routes />;
+    </AuthProvider>
+  );
 }

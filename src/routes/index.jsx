@@ -1,12 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
+import { useAuth } from "../contexts/auth";
 
-//import { AppRoutes } from "./app.routes";
-//import { AuthRoutes } from "./auth.routes";
+import { AppRoutes } from "./app.routes";
+import { AuthRoutes } from "./auth.routes";
 
 export function Routes() {
+  const { user } = useAuth();
+
   return (
     <BrowserRouter>
-      {"realizar a logica de autenticação com AppRoutes e AuthRoutes"}
+      {user? <AppRoutes/> :<AuthRoutes />}
     </BrowserRouter>
   );
 }

@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.13",
+    "axios": "^1.6.7",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
     "node-sass": "^9.0.0",
