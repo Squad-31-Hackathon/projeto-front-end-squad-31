@@ -35,7 +35,10 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setData([token]);
+    if (token) {
+      api.defaults.headers.common["Authorization"];
+      setData({ token });
+    }
   }, []);
 
   return (
