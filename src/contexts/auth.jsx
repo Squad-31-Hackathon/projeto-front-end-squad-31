@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext({});
 
@@ -11,6 +12,7 @@ function AuthProvider({ children }) {
       const response = await api.post("/auth/login", { email, password });
       const { token } = response.data;
 
+      Cookies.set("token", token, { expires: 7 });
       localStorage.setItem("token", token);
 
       api.defaults.headers.authorization = `Bearer ${token}`;
@@ -26,15 +28,18 @@ function AuthProvider({ children }) {
     }
   }
 
-  function signOut(){
-    localStorage.removeItem("token")
-    setData({})
+  function signOut() {
+    localStorage.removeItem("token");
+    setData({});
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setData([token]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ authLogin, signOut,  user: data.token }}>
+    <AuthContext.Provider value={{ authLogin, signOut, user: data.token }}>
       {children}
     </AuthContext.Provider>
   );
