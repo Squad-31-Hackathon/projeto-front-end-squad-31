@@ -20,20 +20,27 @@ export function InputEmail({children, funcButton}){
   
     )
 }
-export function InputNameAndLastName({name,lastName}){
+export function InputNameAndLastName({name,lastName,funcButton}){
+    const handleNameChange = (event) => {
+        funcButton(event, "name");
+      };
+    
+      const handleLastNameChange = (event) => {
+        funcButton(event, "lastName");
+      };
     return(      
             <div  className={styles.divDuo}>
             <TextField 
                 className={styles.inputDuo}
-                required
                 id="outlined-required"
                 label={name}
+                onChange={handleNameChange}
             />
             <TextField
                 className={styles.inputDuo}
-                required
                 id="outlined-required"
                 label={lastName}
+                onChange={handleLastNameChange}
             />
             </div>
 
@@ -46,7 +53,7 @@ export function InputPassword({funcButton, nameInput}){
         <TextField
             className={styles.input}
                 id="outlined-password-input"
-                label="Password"
+                label="Password *"
                 type="password"
                 autoComplete="current-password"
                 onChange={funcButton}

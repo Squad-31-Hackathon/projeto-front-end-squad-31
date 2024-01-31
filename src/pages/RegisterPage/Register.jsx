@@ -6,11 +6,13 @@ import styles from './styles.module.scss'
 
 import { api } from "../../services/api"
 import { useState, useEffect } from "react"
+import { MyAlert } from "../../components/ui/Alert"
 
 
 export default function Register() {
 
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({name:'', lastName:''})
+  const [cadastroSucesso,setCadastroSucesso] = useState('');
   
 
 
@@ -27,6 +29,7 @@ export default function Register() {
     try {
       const response = await api.post('/auth/register', formData);
       console.log('Registro bem-sucedido', response.data);
+      setCadastroSucesso(true)
       // Faça algo com a resposta, como redirecionar o usuário para a página de login ou exibir uma mensagem de sucesso.
     } catch (error) {
         if(error.response){
@@ -45,31 +48,25 @@ export default function Register() {
       </div>
 
       <div className={styles.formLogin}>
+        <div className={styles.alert}>
+            {cadastroSucesso && (
+              <MyAlert/>
+            )}
+        </div>
 
-        <h1>Cadastre-se</h1>
-
+        <p className={styles.p}>Cadastre-se</p>
+        
         <form onSubmit={handleSubmit}>
-          {/* <InputNameAndLastName
-            name="name"
-            lastName="lastName"
-            value={formData.name}
-            onChange={handleChange}
-          /> */}
+          <InputNameAndLastName
+            name="Name *"
+            lastName="LastName *"
+            value={[formData.name,formData.lastName]}
+            funcButton={(e,l) => handleChange(e,l)}
+          /> 
           <InputEmail
-            children="nome"
-            name="name"
-            value={formData.name}
-            funcButton={e => handleChange(e,"name")}
-          />
-          <InputEmail
-            children="sobrenome"
-            name="lastName"
-            value={formData.surname}
-            funcButton={e => handleChange(e,"lastName")}
-          />
-          <InputEmail
-            children="email"
+            children="Email *"
             name="email"
+            type="email"
             value={formData.email}
             funcButton={e => handleChange(e,"email")}
           />
