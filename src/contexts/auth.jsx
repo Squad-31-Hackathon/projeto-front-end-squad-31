@@ -4,19 +4,42 @@ import { api } from "../services/api";
 const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ user: null, token: null });
+  function callApiForConsoleLog() {
+    api.get("/user")
+      .then(response => {
+        console.log("Resposta da API para o console log separado:", response.data);
+      })
+      .catch(error => {
+        console.log("Erro ao chamar a API para console log:", error);
+      });
+  }
+  
+
+  useEffect(() => {
+
+    const token = localStorage.getItem('token');
+
+
+    if (token) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;;
+      setData({ token });
+    }
+    callApiForConsoleLog()
+  }, []);
 
   async function authLogin({email, password}) {
     try {
       const response = await api.post("/auth/login", { email, password });
+      
+
       const {user, token } = response.data;
-
-      //localStorage.setItem("user", JSON.stringify(user))
-      localStorage.setItem("token", token)
-
+    
       api.defaults.headers.authorization = `Bearer ${token}`;
-      setData({ user, token });
 
+      setData({ user, token });
+      localStorage.setItem('token', token);
+ 
       console.log(response);
     } catch (error) {
       if (error.response) {
@@ -27,9 +50,7 @@ function AuthProvider({ children }) {
     }
   }
 
-  useEffect(() =>{
 
-  }, [])
 
   return (
     <AuthContext.Provider value={{ authLogin, user: data.token }}>

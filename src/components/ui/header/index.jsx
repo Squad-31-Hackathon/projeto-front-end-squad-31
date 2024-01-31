@@ -15,7 +15,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import styles from './styles.module.scss';
 
 const pages = ['Meus projetos', 'Descobrir'];
-const settings = ['Logout'];
 
 export function UsHeader() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -162,11 +161,11 @@ export function UsHeader() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+
+                  <MenuItem key="Sair" onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">Sair</Typography>
                   </MenuItem>
-                ))}
+
               </Menu>
             </Box>
           </Toolbar>
