@@ -6,9 +6,11 @@ import { InputEmail, InputPassword } from "../../components/ui/input";
 import imgLogin from "../../assets/img_login.png";
 import styles from "./styles.module.scss";
 
+import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from "../../contexts/auth";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
-// import GoogleLogin from 'react-google-login'
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -30,7 +32,17 @@ export default function Login() {
         <div className={styles.formLogin}>
           <p className={styles.h1}>Entre no Orange Portfólio</p>
           <div>
-            <button className={styles.button}>google</button>
+            <GoogleLogin
+              flow="auth-code"
+              onSuccess={async credentialResponse => {
+                console.log(credentialResponse);
+                const userInfo = jwtDecode(credentialResponse.credential)
+                console.log(userInfo) 
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
           </div>
 
           <form>
