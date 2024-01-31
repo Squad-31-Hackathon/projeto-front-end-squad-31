@@ -5,15 +5,9 @@ const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({ user: null, token: null });
-  function callApiForConsoleLog() {
-    api.get("/user")
-      .then(response => {
-        console.log("Resposta da API para o console log separado:", response.data);
-      })
-      .catch(error => {
-        console.log("Erro ao chamar a API para console log:", error);
-      });
-  }
+  
+  
+  
   
 
   useEffect(() => {
@@ -25,7 +19,7 @@ function AuthProvider({ children }) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;;
       setData({ token });
     }
-    callApiForConsoleLog()
+    
   }, []);
 
   async function authLogin({email, password}) {
@@ -41,6 +35,7 @@ function AuthProvider({ children }) {
       localStorage.setItem('token', token);
  
       console.log(response);
+
     } catch (error) {
       if (error.response) {
         console.log("Não foi possivel entrar",error.response.data.message);
