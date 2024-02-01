@@ -14,8 +14,57 @@ import { api } from '../../../services/api';
 export function AddModal() {
   const [open, setOpen] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState('');
-  const [formData, setFormData] = React.useState({ title: '', tags: [], link: '', description: '', image: null });
+  const [user, setUser] = React.useState('');
+  const [formData, setFormData] = React.useState({
+    title: '',
+    tags: [],
+    description: '',
+    link: '',
+    publishDate: new Date().toISOString(),
+    owner: {
+      id: user.id,
+      name: user.name,
+      lastName: user.lastName,
+      email: user.email,
+      profileImage: null
+    },
+    image: null
+  });
 
+
+  React.useEffect(() => {
+
+      const fetchUser = async () => {
+        try {
+          const storedUser = localStorage.getItem("user");
+          if (storedUser) {
+            setUser(JSON.parse(storedUser));
+          } else {
+            const response = await api.get("/user");
+            setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+          }
+        } catch (error) {
+          console.error("Erro ao chamar a API:", error);
+        }
+      };
+  
+      fetchUser();
+  }, []);
+  React.useEffect(() => {
+    if (user) {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        owner: {
+          id: user.id,
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          profileImage: user.profileImage
+        }
+      }));
+    }
+  }, [user]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -44,20 +93,41 @@ export function AddModal() {
   };
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
+    
+  
+    const formDataWithImage = new FormData();
+    formDataWithImage.append('image', formData.image);
+  
+
+    formDataWithImage.append('title', formData.title);
+    formDataWithImage.append('tags', formData.tags);
+    formDataWithImage.append('description', formData.description);
+    formDataWithImage.append('link', formData.link);
+    formDataWithImage.append('publishDate', formData.publishDate);
+    formDataWithImage.append('owner[id]', formData.owner.id);
+    formDataWithImage.append('owner[name]', formData.owner.name);
+    formDataWithImage.append('owner[lastName]', formData.owner.lastName);
+    formDataWithImage.append('owner[email]', formData.owner.email);
+    formDataWithImage.append('owner[profileImage]', formData.owner.profileImage);
+  
     try {
-      const response = await api.post('/project', formData);
-      console.log(response);
+      const response = await api.post('/project', formDataWithImage, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Registro bem-sucedido', response.data);
     } catch (error) {
-        if(error.response){
-          console.error('Erro ao registrar:', error.response.data);
-        }
-      
+      if (error.response) {
+        console.error('Erro ao registrar:', error.response.data);
+      }
       // Lide com o erro, como exibir uma mensagem de erro para o usuário.
     }
   };
+
+
+
   return (
     <div>
       <button className={styles.prime} onClick={handleOpen}>ADICIONAR PROJETO</button>
