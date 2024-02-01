@@ -18,7 +18,7 @@ export function MeusProjetos() {
         console.error("deu erro" + err);
       });
   }, []);
-
+   
   return (
     //exemplo de cunsumo de api get <p>Usuario: {user?.name}</p>
     <div>
@@ -31,8 +31,8 @@ export function MeusProjetos() {
               <Avatar className={styles.avatar}/>
             </div>
             <div className={styles.resto}>
-              <p className={styles.nome}>Nome Sobrenome</p>
-              <p className={styles.pais}>Pais</p>
+              <p className={styles.nome}>Nome</p>
+              <p className={styles.pais}>Brasil</p>
               <AddModal/>
             </div>
         </div>

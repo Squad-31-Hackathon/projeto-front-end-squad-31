@@ -15,7 +15,7 @@ function AuthProvider({ children }) {
       Cookies.set("token", token, { expires: 7 });
       localStorage.setItem("token", token);
 
-      api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ token });
 
       console.log(response);
@@ -36,7 +36,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      api.defaults.headers.common["Authorization"];
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ token });
     }
   }, []);
