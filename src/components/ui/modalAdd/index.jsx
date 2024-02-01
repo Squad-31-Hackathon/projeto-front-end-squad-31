@@ -6,16 +6,18 @@ import styles from './styles.module.scss'
 import { InputNormal, TextInput } from '../input';
 import { Tag } from '../tag';
 import { AddButton, DisButton } from '../button';
+import { api } from '../../../services/api';
 
 
 
 
 export function AddModal() {
   const [open, setOpen] = React.useState(false);
+  const [imageSrc, setImageSrc] = React.useState('');
+  const [formData, setFormData] = React.useState({ title: '', tags: [], link: '', description: '', image: null });
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [imageSrc, setImageSrc] = React.useState('');
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -23,30 +25,39 @@ export function AddModal() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImageSrc(reader.result);
+        setFormData(prevFormData => ({ ...prevFormData, image: file }));
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const [formData, setFormData] = React.useState({});
-
   const handleChange = (e, name) => {
-    
     const { value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === 'tags') {
+      const tagsArray = value.split(',').map(tag => tag.trim());
+      setFormData(prevFormData => ({ ...prevFormData, [name]: tagsArray }));
+    } else {
+      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+    }
     console.log(formData)
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     try {
-      const response = await api.post('/projects', formData);
-      console.log('Projeto cadastrado com sucesso', response.data);
+      const response = await api.post('/project', formData);
+      console.log(response);
+      console.log('Registro bem-sucedido', response.data);
     } catch (error) {
-      console.error('Erro ao cadastrar o projeto:', error.response.data);
+        if(error.response){
+          console.error('Erro ao registrar:', error.response.data);
+        }
+      
+      // Lide com o erro, como exibir uma mensagem de erro para o usuário.
     }
   };
-
   return (
     <div>
       <button className={styles.prime} onClick={handleOpen}>ADICIONAR PROJETO</button>
@@ -56,48 +67,38 @@ export function AddModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={styles.div}>
+        <form className={styles.div} onSubmit={handleSubmit}>
           <div className={styles.title}>
             <p>Adicionar projeto</p>
           </div>
           <div className={styles.midle}>
-            <form className={styles.midle} onSubmit={handleSubmit}>
-              <label className={`${styles.textImg} ${imageSrc && styles.whiteBackground}`} tabIndex="0">
-                <input
-                  id='addImg'
-                  type="file"
-                  className={styles.img}
-                  value={formData.image}
-                  onChange={handleImageChange}
-                />
-                <div id="imgText">
-                  {imageSrc ? (
-                    <img src={imageSrc} alt="Selected" className={styles.selectedImage} />
-                  ) : (
-                    <span className={styles.textoInput}>
-                      <span>Selecione uma imagem</span>
-                      <span className="icon">Ícone Aqui</span>
-                    </span>
-                  )}
-                </div>
-              </label>
-              <div className={styles.form}>
-                <InputNormal children={"Título"}
-                 name='titulo'
-                 value={formData.title} 
-                 funcButton={e => handleChange(e, "titulo")} />
-                <Tag name='tag'
-                value={formData.tags} 
-                funcButton={e => handleChange(e, "tag")} />
-                <InputNormal children={"Link"} 
-                name='link' 
-                value={formData.link}
-                funcButton={e => handleChange(e, "link")} />
-                <TextInput name='texto'
-                value={formData.description} 
-                funcButton={e => handleChange(e, "texto")} />
+            <label className={`${styles.textImg} ${imageSrc && styles.whiteBackground}`} tabIndex="0">
+              <input
+                id='addImg'
+                type="file"
+                className={styles.img}
+                onChange={(e) => {
+                  handleImageChange(e);
+                  handleChange(e, 'image'); 
+                }}
+              />
+              <div id="imgText">
+                {imageSrc ? (
+                  <img src={imageSrc} alt="Selected" className={styles.selectedImage} />
+                ) : (
+                  <span className={styles.textoInput}>
+                    <span>Selecione uma imagem</span>
+                    <span className="icon">Ícone Aqui</span>
+                  </span>
+                )}
               </div>
-            </form>
+            </label>
+            <div className={styles.form}>
+              <InputNormal children={"Título"} name='title' value={formData.title} funcButton={e => handleChange(e, "title")} />
+              <InputNormal name='tags' children={"Tags"} value={formData.tags} funcButton={e => handleChange(e, "tags")} />
+              <InputNormal children={"Link"} name='link' value={formData.link} funcButton={e => handleChange(e, "link")} />
+              <TextInput name='description' value={formData.description} funcButton={e => handleChange(e, "description")} />
+            </div>
           </div>
           <div className={styles.final}>
             <div>
@@ -108,12 +109,11 @@ export function AddModal() {
               <DisButton children={'CANCELAR'} handleClose={handleClose} />
             </div>
           </div>
-        </div>
+        </form>
       </Modal>
     </div>
   );
 }
-
 export function ButtonModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
