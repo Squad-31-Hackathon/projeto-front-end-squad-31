@@ -8,15 +8,13 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import styles from "./styles.module.scss";
 
-const pages = ["Meus projetos", "Descobrir"];
-
-import { useAuth } from "../../../contexts/auth"; 
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../contexts/auth";
 
 export function UsHeader() {
   const { signOut } = useAuth();
@@ -86,17 +84,12 @@ export function UsHeader() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: "flex", md: "none" },
                 }}
               >
                 <div className={styles.font}>
-                  {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography className={styles.texto} textAlign="center">
-                        {page}
-                      </Typography>
-                    </MenuItem>
-                  ))}
+                  <Link to={`/`}>Meus Projetos</Link>
+                  <Link to={`/descobrir`}>Descobrir</Link>
                 </div>
               </Menu>
             </Box>
@@ -124,16 +117,8 @@ export function UsHeader() {
               className={styles.font}
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
             >
-              {pages.map((page) => (
-                <Button
-                  className={styles.texto}
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              ))}
+              <Link to={`/`}>Meus Projetos</Link>
+              <Link to={`/descobrir`}>Descobrir</Link>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
