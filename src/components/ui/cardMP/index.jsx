@@ -6,12 +6,14 @@ import { Avatar, CardActionArea } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import styles from './styles.module.scss'
 import CloseIcon from '@mui/icons-material/Close';
+import CreateIcon from '@mui/icons-material/Create';
 
 
-export default function DescobrirCard() {
+export default function CardMP() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
 
   return (
             <div>
@@ -96,6 +98,10 @@ export default function DescobrirCard() {
                     </div>
                     
                 </Modal>
+
+                    <button className={styles.func}>
+                        <CreateIcon className={styles.pen} />
+                    </button>
 
             </div>
   );

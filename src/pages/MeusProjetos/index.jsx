@@ -5,6 +5,7 @@ import { AddModal, ButtonModal } from "../../components/ui/modalAdd";
 import { InputNormal } from "../../components/ui/input";
 import { api } from "../../services/api"
 import { useState, useEffect } from "react"
+import CardMP from "../../components/ui/cardMP";
 
 
 
@@ -62,9 +63,9 @@ export function MeusProjetos() {
           <InputNormal children={"Buscar tags"}/>
         </div>
         <div className={styles.final}>
-          <ButtonModal/>
-          <ButtonModal/>
-          <ButtonModal/>
+          <div><CardMP/></div>
+          <div><CardMP/></div>
+          <div><CardMP/></div>
         </div>
       </div>
       

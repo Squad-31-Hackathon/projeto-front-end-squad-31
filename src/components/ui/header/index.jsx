@@ -88,7 +88,7 @@ export function UsHeader() {
                   display: { xs: "flex", md: "none" },
                 }}
               >
-                <div className={styles.font}>
+                <div className={styles.fonte}>
                   <Link to={`/`}>Meus Projetos</Link>
                   <Link to={`/descobrir`}>Descobrir</Link>
                 </div>

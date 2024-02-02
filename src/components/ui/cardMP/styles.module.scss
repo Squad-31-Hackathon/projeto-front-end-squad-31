@@ -12,7 +12,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    
 
+    
 
     .close{
         margin-top: -10px;
@@ -93,15 +95,46 @@
     }
 
 }
-
+div{
+    position: relative;
+    .func {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-top: -3rem;
+        position: absolute;
+        top: 0; 
+        left: 86%; 
+        background-color: #FFCC99;
+        border-radius: 50%;
+        color: white;
+        z-index: 999; 
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: opacity 0.3s; 
+        opacity: 0.7;
+        .pen{
+            width: 3rem;
+            height: 3rem;
+            color: black;
+        }
+    }
+    .func:hover{
+        opacity: 1;
+    }
+}
 
 .button{
+
     display: flex;
     align-items: center;
     justify-items: center;
     border: none;
     width: 28.9rem;
     height: 19rem;
+
     .cart{
         div{
             padding: 0;
