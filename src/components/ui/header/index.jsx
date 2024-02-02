@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import styles from "./styles.module.scss";
 
+const pages = ['Meus projetos', 'Descobrir'];
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../contexts/auth";
 
@@ -152,6 +153,7 @@ export function UsHeader() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" onClick={signOut}>
                     Sair

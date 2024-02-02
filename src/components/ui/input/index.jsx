@@ -62,7 +62,7 @@ export function InputPassword({funcButton, nameInput}){
 
     )
 }
-export function InputNormal({children}){
+export function InputNormal({children, funcButton}){
     return(      
        
         
@@ -71,6 +71,7 @@ export function InputNormal({children}){
                 className={styles.input}
                 id="outlined-required"
                 label={children}
+                onChange={funcButton}
             />
             </div>
   
@@ -90,7 +91,7 @@ export function InputAdd({children}){
   
     )
 }
-export function TextInput(){
+export function TextInput({funcButton}){
     return(      
         
             <div className={styles.divadd}>
@@ -100,6 +101,7 @@ export function TextInput(){
                 label="Descrição"
                 multiline
                 rows={4}
+                onChange={funcButton}
         />
             </div>
   

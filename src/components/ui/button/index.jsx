@@ -15,7 +15,7 @@ export function UsButton({children}){
 export function AddButton({children}){
     return(  
         <div className={styles.divAdd}>
-            <Button className={styles.buttonAdd} variant="contained">{children}</Button>
+            <Button type="submit" className={styles.buttonAdd} variant="contained">{children}</Button>
         </div>    
 
     )

@@ -5,7 +5,23 @@ import Cookies from "js-cookie";
 const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ user: null, token: null });
+  
+  
+  
+  
+
+  useEffect(() => {
+
+    const token = localStorage.getItem('token');
+
+
+    if (token) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;;
+      setData({ token });
+    }
+    
+  }, []);
 
   async function authLogin({ email, password }) {
     try {
@@ -15,10 +31,17 @@ function AuthProvider({ children }) {
       Cookies.set("token", token, { expires: 7 });
       localStorage.setItem("token", token);
 
+      const {user, token } = response.data;
+    
       api.defaults.headers.authorization = `Bearer ${token}`;
+
       setData({ token });
 
+      setData({ user, token });
+      localStorage.setItem('token', token);
+ 
       console.log(response);
+
     } catch (error) {
       if (error.response) {
         console.log("Não foi possivel entrar", error.response.data.message);
@@ -27,6 +50,7 @@ function AuthProvider({ children }) {
       }
     }
   }
+
 
   function signOut() {
     localStorage.removeItem("token");
@@ -40,6 +64,7 @@ function AuthProvider({ children }) {
       setData({ token });
     }
   }, []);
+
 
   return (
     <AuthContext.Provider value={{ authLogin, signOut, user: data.token }}>
