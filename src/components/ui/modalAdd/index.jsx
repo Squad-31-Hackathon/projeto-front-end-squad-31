@@ -16,19 +16,12 @@ export function AddModal() {
   const [imageSrc, setImageSrc] = React.useState('');
   const [user, setUser] = React.useState('');
   const [formData, setFormData] = React.useState({
+    userUuid: '',
     title: '',
     tags: [],
     description: '',
     link: '',
-    publishDate: new Date().toISOString(),
-    owner: {
-      id: user.id,
-      name: user.name,
-      lastName: user.lastName,
-      email: user.email,
-      profileImage: null
-    },
-    image: null
+    image: ''
   });
 
 
@@ -55,13 +48,8 @@ export function AddModal() {
     if (user) {
       setFormData(prevFormData => ({
         ...prevFormData,
-        owner: {
-          id: user.id,
-          name: user.name,
-          lastName: user.lastName,
-          email: user.email,
-          profileImage: user.profileImage
-        }
+        userUuid: user.id,
+
       }));
     }
   }, [user]);
@@ -71,10 +59,11 @@ export function AddModal() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      
       const reader = new FileReader();
       reader.onloadend = () => {
         setImageSrc(reader.result);
-        setFormData(prevFormData => ({ ...prevFormData, image: file }));
+        setFormData(prevFormData => ({ ...prevFormData, image: reader.result }));
       };
       reader.readAsDataURL(file);
     }
@@ -90,39 +79,26 @@ export function AddModal() {
       setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
     }
     console.log(formData)
+
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     
-  
-    const formDataWithImage = new FormData();
-    formDataWithImage.append('image', formData.image);
-  
-
-    formDataWithImage.append('title', formData.title);
-    formDataWithImage.append('tags', formData.tags);
-    formDataWithImage.append('description', formData.description);
-    formDataWithImage.append('link', formData.link);
-    formDataWithImage.append('publishDate', formData.publishDate);
-    formDataWithImage.append('owner[id]', formData.owner.id);
-    formDataWithImage.append('owner[name]', formData.owner.name);
-    formDataWithImage.append('owner[lastName]', formData.owner.lastName);
-    formDataWithImage.append('owner[email]', formData.owner.email);
-    formDataWithImage.append('owner[profileImage]', formData.owner.profileImage);
-  
+    e.preventDefault();
     try {
-      const response = await api.post('/project', formDataWithImage, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      const response = await api.post('/project', formData,{
+        headers:{
+          'Content-Type': 'application/json'
         }
       });
+      console.log(response);
       console.log('Registro bem-sucedido', response.data);
     } catch (error) {
-      if (error.response) {
-        console.error('Erro ao registrar:', error.response.data);
-      }
-      // Lide com o erro, como exibir uma mensagem de erro para o usuário.
+        if(error.response){
+          console.error('Erro ao registrar:', error.response.data);
+        }
+      
+
     }
   };
 

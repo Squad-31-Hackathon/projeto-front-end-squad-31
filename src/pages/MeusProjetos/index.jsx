@@ -10,7 +10,7 @@ import { useState, useEffect } from "react"
 
 
 export function MeusProjetos() {
-
+  
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -55,7 +55,9 @@ export function MeusProjetos() {
               <AddModal/>
             </div>
         </div>
+
         <div className={styles.midle}>
+          
           <p>Meus projetos</p>
           <InputNormal children={"Buscar tags"}/>
         </div>
