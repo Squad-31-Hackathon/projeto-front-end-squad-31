@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 export function UsButton({children}){
     return(  
         <div className={styles.div}>
-            <Button className={styles.button} variant="contained">{children}</Button>
+            <Button type="submit" className={styles.button} variant="contained">{children}</Button>
         </div>    
 
     )

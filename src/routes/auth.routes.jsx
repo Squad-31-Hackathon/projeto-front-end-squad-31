@@ -1,13 +1,13 @@
-import {Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 
-import { SignIn } from "../pages/SignIn"
-import { SignUp } from "../pages/SignUp"
+import Login from "../pages/LoginPage/Login";
+import Register from "../pages/RegisterPage/Register";
 
-export function AuthRoutes(){
-  return(
-    <Routes>
-      <Route path="/" element={<SignIn/>} />
-      <Route path="/cadastrar" element={<SignUp/>} />
-    </Routes>
-  )
+export function AuthRoutes() {
+  return (
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+  );
 }

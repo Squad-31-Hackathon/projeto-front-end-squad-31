@@ -3,10 +3,24 @@ import { UsHeader } from "../../components/ui/header";
 import styles from './styles.module.scss'
 import { AddModal, ButtonModal } from "../../components/ui/modalAdd";
 import { InputNormal } from "../../components/ui/input";
+import { api } from "../../services/api"
+import { useState, useEffect } from "react"
 
 export function MeusProjetos() {
 
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    api
+      .get("/user/projects")
+      .then((response) => setUser(response.data))
+      .catch((err) => {
+        console.error("deu erro" + err);
+      });
+  }, []);
+
   return (
+    //exemplo de cunsumo de api get <p>Usuario: {user?.name}</p>
     <div>
       <div className={styles.header}>
         <UsHeader/>

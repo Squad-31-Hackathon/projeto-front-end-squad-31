@@ -1,47 +1,67 @@
-import { UsButton } from "../../components/ui/button"
-import { InputEmail,InputPassword} from "../../components/ui/input"
-import * as React from 'react'
-import imgLogin from '../../assets/img_login.png'
-import styles from './styles.module.scss'
-// import GoogleLogin from 'react-google-login'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { UsButton } from "../../components/ui/button";
+import { InputEmail, InputPassword } from "../../components/ui/input";
+import imgLogin from "../../assets/img_login.png";
+import styles from "./styles.module.scss";
+
+import { GoogleLogin } from '@react-oauth/google';
+import { useAuth } from "../../contexts/auth";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // const [name, setName] = useState()
-  // const [email, setEmail] = useState()
-  // const [profilePic, setProfilePic] = useState()
-  // const [isLoggedIn, setIsLogedIn] = useState()
-  // const responseGoogle = (response) => {
-  //   console.log(response)
-  // }
+  const { authLogin } = useAuth();
+
+  function handleAuthLogin() {
+    authLogin({ email, password });
+  }
+
   return (
-
-    <div className={styles.main}> 
+    <div className={styles.main}>
       <div>
-        <img src={imgLogin} alt='img Login' className={styles.imgLogin}/>
+        <img src={imgLogin} alt="img Login" className={styles.imgLogin} />
       </div>
-       
+
       <div className={styles.fom}>
         <div className={styles.formLogin}>
           <p className={styles.h1}>Entre no Orange Portfólio</p>
           <div>
-            <button className={styles.button}>google</button>
+            <GoogleLogin
+              flow="auth-code"
+              onSuccess={async credentialResponse => {
+                console.log(credentialResponse);
+                const userInfo = jwtDecode(credentialResponse.credential)
+                console.log(userInfo) 
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
           </div>
-          
+
           <form>
-          <p className={styles.p}>Faça login com email</p>
-              <InputEmail children={"Email"}/>
-              <InputPassword/>
-              <UsButton children={"Entrar"}/>
-              <a href="../">Cadastre-se</a>
+            <p className={styles.p}>Faça login com email</p>
+            <InputEmail
+              children={"Email"}
+              value={email}
+              funcButton={(e) => setEmail(e.target.value)}
+            />
+            <InputPassword
+              value={password}
+              funcButton={(e) => setPassword(e.target.value)}
+            />
+            <UsButton onClick={handleAuthLogin} children={"Entrar"} />
+
+            <Link to="/register">Cadastre-se</Link>
           </form>
-          
         </div>
       </div>
-       
-
     </div>
-
-  )
+  );
 }
