@@ -13,6 +13,7 @@ export default function DescobrirCard() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+
   return (
             <div>
                 <button className={styles.button} onClick={handleOpen}>
@@ -96,6 +97,7 @@ export default function DescobrirCard() {
                     </div>
                     
                 </Modal>
+                
 
             </div>
   );
