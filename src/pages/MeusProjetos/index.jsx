@@ -63,7 +63,7 @@ export function MeusProjetos() {
           <InputNormal children={"Buscar tags"}/>
         </div>
         <div className={styles.final}>
-          <ButtonModal/>
+          <CardMP/>
         </div>
       </div>
       
