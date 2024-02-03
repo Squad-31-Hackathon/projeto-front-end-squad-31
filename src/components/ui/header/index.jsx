@@ -127,7 +127,7 @@ export function UsHeader() {
                     <Avatar
                       className={styles.avatar}
                       alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
+
                     />
                   </IconButton>
                   <IconButton color="inherit">

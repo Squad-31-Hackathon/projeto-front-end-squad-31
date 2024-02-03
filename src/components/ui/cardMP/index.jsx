@@ -11,16 +11,11 @@ import Menu from '@mui/material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { AddButton, DisButton } from '../button';
 import { InputNormal, TextInput } from '../input';
+import { api } from '../../../services/api';
 
 export default function CardMP() {
 
-    const [openM, setOpenM] = React.useState(false);
-    const handleOpenM = () => {
-        setOpenM(true);
-  };
-    const handleCloseM = () => {
-        setOpenM(false);
-  };
+ 
   const [openEdit, setOpenEdit] = React.useState(false);
     const handleOpenEdit = () => {
         setOpenEdit(true);
@@ -37,13 +32,36 @@ export default function CardMP() {
 };
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const [openMenu, setOpenMenu] = React.useState({});
+
+// Função para abrir o menu de um item específico
+const handleOpenMenu = (uuid) => {
+    setOpenMenu((prevState) => ({
+        ...prevState,
+        [uuid]: true
+    }));
+};
+
+
+const handleCloseMenu = (uuid) => {
+    setOpenMenu((prevState) => ({
+        ...prevState,
+        [uuid]: false
+    }));
+};
+
+
+const handleClick = (event, uuid) => {
+    handleOpenMenu(uuid);
+    setAnchorEl(event.currentTarget);
+};
+
+
+const handleClose = () => {
+    setAnchorEl(null);
+
+    setOpenMenu({});
+};
 
     const [imageSrc, setImageSrc] = React.useState('');
   const [user, setUser] = React.useState('');
@@ -131,26 +149,107 @@ export default function CardMP() {
     }
   };
 
+  const [openModal, setOpenModal] = React.useState({});
+
+
+const handleOpenM = (uuid) => {
+  setOpenModal((prevState) => ({
+    ...prevState,
+    [uuid]: true
+  }));
+};
+
+
+const handleCloseM = (uuid) => {
+  setOpenModal((prevState) => ({
+    ...prevState,
+    [uuid]: false
+  }));
+};
+
+
+
+  React.useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+  const [userV, setUserV] = React.useState([]);
+  const [userOn, setUserOn] = React.useState();
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+          setUserOn(JSON.parse(storedUser));
+        } else {
+          const response = await api.get("/user");
+          setUserOn(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+      } catch (error) {
+        console.error("Erro ao chamar a API:", error);
+      }
+    };
+
+    fetchUser();
+    return () => {
+      };
+}, []);
+  React.useEffect(() => { 
+    if (!userOn || !userOn.id) return;
+    const fetchProjects = async () => {
+      try {
+        const response = await api.get("/project");
+        const userProjects = response.data.filter(project => project.owner.id === userOn.id);
+        setUserV(userProjects);
+      } catch (error) {
+        console.error("Erro ao buscar os projetos:", error);
+      }
+    };
+  
+    fetchProjects();
+    return () => {
+    };
+    
+  }, [userOn]);
+
+  
+  function formatMonthYear(dateString) {
+    const date = new Date(dateString);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const year = date.getFullYear().toString().slice(-2);
+
+    return `${month}/${year}`;
+}
+  
+
   return (
-            <div className={styles.button} >
+    <div className={styles.all}>
+         {userV.map((dados) => (
+            <div className={styles.button}  key={dados.uuid} >
+                    
 
                     <Card className={styles.cart}>
                     <CardActionArea  >
                         <CardContent>
                             <div className={styles.card}>
-                                <img className={styles.img} src="../../../../public/semImagem.png"></img> 
+                                <img className={styles.img} src={dados.image}></img> 
                             </div>
-                            <div className={styles.finbar}>
+                            <div div className={styles.perfilWrapper}>
+                                <div className={styles.finbar}>
                                 <div className={styles.perfil}>
                                     <Avatar className={styles.perImg}/>
-                                    <p>Nome Sobrenome</p>
+                                    <p>{dados.owner.name} {dados.owner.lastName}</p>
                                     <FiberManualRecordIcon className={styles.ponto}/>
-                                    <p>02/24</p>
+                                    <p>{formatMonthYear(dados.publishDate)}</p>
                                 </div>
                                 <div className={styles.tags}>
-                                    <span>111</span>
-                                    <span>211</span>
+                                {dados.tags.map((tag, index) => (
+                                    <span key={index}>{tag}</span>
+                                ))}
                                 </div>
+                            </div>
                             </div>
                             
                         </CardContent>
@@ -163,10 +262,9 @@ export default function CardMP() {
                 <Button
 
                     id="basic-button"
-                    aria-controls={open ? 'basic-menu' : undefined}
+                    onClick={(event) => handleClick(event, dados.uuid)}
+                    aria-controls={openMenu[dados.uuid] ? 'basic-menu' : undefined}
                     aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
                 >
                    <CreateIcon className={styles.pen}/>
                 </Button>
@@ -174,26 +272,26 @@ export default function CardMP() {
                     className={styles.menu}
                     id="basic-menu"
                     anchorEl={anchorEl}
-                    open={open}
+                    open={openMenu[dados.uuid] || false}
                     onClose={handleClose}
                     MenuListProps={{
                     'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <li  onClick={() => { handleClose(); handleOpenEdit();}}>Editar</li>
-                    <li onClick={() => { handleClose(); handleOpenEx();}}>Excluir</li>
-                    <li onClick={() => { handleClose(); handleOpenM();}}>Visualizar</li>
+                    <li onClick={() => { handleClose(dados.uuid); handleOpenEdit();}}>Editar</li>
+                    <li onClick={() => { handleClose(dados.uuid); handleOpenEx();}}>Excluir</li>
+                    <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid);}}>Visualizar</li>
                 </Menu>
-
+                </div>
                 <Modal
-                    open={openM}
-                    onClose={handleCloseM}
+                    open={openModal[dados.uuid]}
+                    onClose={() => handleCloseM(dados.uuid)}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
                     <div  className={styles.divV}> 
                         <div className={styles.closeV}>
-                            <button onClick={handleCloseM}><CloseIcon/></button>
+                            <button onClick={() => handleCloseM(dados.uuid)}><CloseIcon/></button>
                         </div>
                         <div className={styles.infoV}>
                             <div className={styles.perfilV}>
@@ -201,49 +299,49 @@ export default function CardMP() {
                                     <Avatar/>
                                 </div>
                                 <div>
-                                    <p>Nome Sobrenome</p>
-                                    <p>02/24</p>
+                                    <p>{dados.owner.name} {dados.owner.lastName}</p>
+                                    <p>{formatMonthYear(dados.publishDate)}</p>
                                 </div>
                             </div>
                             <div className={styles.titleV}>
-                                <p>Titulo do Projeto</p>      
+                                <p>{dados.title}</p>      
                             </div>
                             <div className={styles.tagsV}>
-                                <span>Tag1</span>
-                                <span>Tag2</span>
+                                {dados.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
+                                    ))}
                             </div>
                         </div>
                         <div className={styles.midleV} >
                           
-                            <img className={styles.imgV} src='../../../../public/semImagem.png'></img>
+                            <img className={styles.imgV} src={dados.image}/>
                             <div className={styles.respV}>
                                 <div className={styles.perfilV}>
                                     <div>
                                         <Avatar className={styles.avatarV} />
                                     </div>
                                     <div className={styles.textV}>
-                                        <p>Nome Sobrenome</p>
+                                        <p>{dados.owner.name} {dados.owner.lastName}</p>
                                         <FiberManualRecordIcon className={styles.pontoV}/>
-                                        <p>02/24</p>
+                                        <p>{formatMonthYear(dados.publishDate)}</p>
                                     </div>
                                     
                                 </div>
                                 <div className={styles.tagsV}>
-                                        <span>Tag1</span>
-                                        <span>Tag2</span>
+                                        {dados.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
+                                    ))}
                                     </div>
                             </div>  
 
                         </div>
                         <div className={styles.finalV}>
                             <div className={styles.descrV}>
-                                <p>  Temos o prazer de compartilhar com vocês uma variação do nosso primeiro recurso gratuito.
-                                     É um modelo de IA.
-                                     Tentamos redesenhar uma versão mais minimalista do nosso primeiro projeto.</p>
+                                <p>  {dados.description}</p>
                             </div>
                             <div className={styles.linkV}>
                                 <p>Download</p>
-                                <a href="#">https://gumroad.com/products/wxCSL</a>
+                                <a href={dados.link}>{dados.link}</a>
                             </div>
                         </div>
                     </div>
@@ -326,10 +424,13 @@ export default function CardMP() {
                     </Modal>
 
                     </div>
-                
+       
+                   
 
-                
-        
-            </div>
+ ))}
+
+    </div>
+    
+   
   );
 }
