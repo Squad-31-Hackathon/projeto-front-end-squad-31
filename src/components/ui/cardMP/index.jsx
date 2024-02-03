@@ -8,7 +8,6 @@ import styles from './styles.module.scss'
 import CreateIcon from '@mui/icons-material/Create';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import CloseIcon from '@mui/icons-material/Close';
 import { AddButton, DisButton } from '../button';
 import { InputNormal, TextInput } from '../input';

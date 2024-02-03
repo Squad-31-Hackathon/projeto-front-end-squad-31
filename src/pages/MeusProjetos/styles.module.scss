@@ -40,25 +40,10 @@
         margin: 10px;
     }
 }
-.final{
-    width: 100%;
-    
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
 
-}
-.final > div {
-   
-    margin-right: 10px;
-    margin-bottom: 90px;
-}
 @media (max-width: 860px) {
 
-    .final{
-        justify-content: center;
-    }
+
  
  }
 @media (max-width: 860px) {

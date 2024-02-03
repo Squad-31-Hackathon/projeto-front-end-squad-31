@@ -22,9 +22,7 @@ export function Descobrir() {
           <InputNormal children={"Buscar Tags"} />
         </div>
         <div className={styles.final}>
-          <div>
             <DescobrirCard />
-          </div>
         </div>
       </div>
     </div>

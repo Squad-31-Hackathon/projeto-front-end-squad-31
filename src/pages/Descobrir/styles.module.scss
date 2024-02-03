@@ -24,19 +24,12 @@
     justify-content: flex-start;
 }
 .final{
-    width: 100%;
-    //background-color: red;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    width: 90%;
+
+
 
 }
-.final > div {
-   
-    margin-right: 10px;
-    margin-bottom: 90px;
-}
+
 @media (max-width: 614px) {
 
    .midle{

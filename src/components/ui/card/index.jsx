@@ -11,9 +11,21 @@ import { api } from "../../../services/api";
 import { useState, useEffect } from "react";
 
 export default function DescobrirCard() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openModal, setOpenModal] = React.useState({});
+
+  const handleOpen = (uuid) => {
+    setOpenModal((prevState) => ({
+      ...prevState,
+      [uuid]: true
+    }));
+  };
+
+  const handleClose = (uuid) => {
+    setOpenModal((prevState) => ({
+      ...prevState,
+      [uuid]: false
+    }));
+  }
 
   const [user, setUser] = useState([]);
 
@@ -27,37 +39,40 @@ export default function DescobrirCard() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.all}>
       {user.map((dados) => (
         <div key={dados.uuid}>
-          <button className={styles.button} onClick={handleOpen}>
+          <button className={styles.button} onClick={() => handleOpen(dados.uuid)}>
             <Card className={styles.cart}>
               <CardActionArea>
                 <CardContent>
                   <div className={styles.card}>
                     <img className={styles.img} src={dados.image}></img>
                   </div>
-                  <div className={styles.perfil}>
-                    <Avatar className={styles.perImg} />
-                    <p>
-                      {dados.owner.name} {dados.owner.lastName}
-                    </p>
-                    <FiberManualRecordIcon className={styles.ponto} />
-                    <p>02/24</p>
-                  </div>
+                  
                 </CardContent>
+                <div className={styles.perfilWrapper}>
+                <div className={styles.perfil}>
+                <Avatar className={styles.perImg} />
+                <p>
+                    {dados.owner.name} {dados.owner.lastName}
+                </p>
+                <FiberManualRecordIcon className={styles.ponto} />
+                <p>02/24</p>
+            </div>
+        </div>
               </CardActionArea>
             </Card>
           </button>
           <Modal
-            open={open}
-            onClose={handleClose}
+            open={openModal[dados.uuid]}
+            onClose={() => handleClose(dados.uuid)}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
             <div className={styles.div}>
               <div className={styles.close}>
-                <button onClick={handleClose}>
+                <button onClick={() => handleClose(dados.uuid)}>
                   <CloseIcon />
                 </button>
               </div>
@@ -77,8 +92,8 @@ export default function DescobrirCard() {
                   <p>{dados.title}</p>
                 </div>
                 <div className={styles.tags}>
-                  <span>Tag1</span>
-                  <span>Tag2</span>
+                  <span>{dados.tags}</span>
+                  <span>{dados.tags}</span>
                 </div>
               </div>
               <div className={styles.midle}>
@@ -120,3 +135,4 @@ export default function DescobrirCard() {
     </div>
   );
 }
+
