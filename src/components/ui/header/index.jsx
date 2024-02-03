@@ -88,10 +88,8 @@ export function UsHeader() {
                   display: { xs: "flex", md: "none" },
                 }}
               >
-                <div className={styles.fonte}>
-                  <Link to={`/`}>Meus Projetos</Link>
-                  <Link to={`/descobrir`}>Descobrir</Link>
-                </div>
+                  <li className={styles.li}><Link to={`/`}>Meus Projetos</Link></li>
+                  <li className={styles.li}><Link to={`/descobrir`}>Descobrir</Link></li>
               </Menu>
             </Box>
             <img
