@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import styles from "./styles.module.scss";
 
-export function Tag() {
+export function Tag({funcButton}) {
     const [tags, setTags] = useState([]);
     const [isInputFocused, setIsInputFocused] = useState(false);
 
@@ -36,6 +36,7 @@ export function Tag() {
                     onBlur={handleInputBlur}
                     className={styles.input}
                     required
+                    onChange={funcButton}
                 />
                 <label>Tags</label>
             </div>

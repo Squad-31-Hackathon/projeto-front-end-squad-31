@@ -13,15 +13,18 @@ import { jwtDecode } from "jwt-decode";
 
 
 export default function Login() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { authLogin } = useAuth();
 
-  function handleAuthLogin() {
+  function handleAuthLogin(e) {
+    e.preventDefault();
     authLogin({ email, password });
+    console.log(email)
   }
-
+ 
   return (
     <div className={styles.main}>
       <div>
@@ -45,7 +48,7 @@ export default function Login() {
             />
           </div>
 
-          <form>
+          <form onSubmit={handleAuthLogin}>
             <p className={styles.p}>Faça login com email</p>
             <InputEmail
               children={"Email"}
@@ -56,7 +59,7 @@ export default function Login() {
               value={password}
               funcButton={(e) => setPassword(e.target.value)}
             />
-            <UsButton onClick={handleAuthLogin} children={"Entrar"} />
+            <UsButton type="submit" children={"Entrar"} />
 
             <Link to="/register">Cadastre-se</Link>
           </form>

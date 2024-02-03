@@ -4,12 +4,7 @@
     align-items: center;
     justify-content: space-between;
 }
-.fom{
 
-    margin-top: 2rem;
-
-
-}
 .imgRegister {
     height: 99vh;
     background-size: contain;
@@ -21,8 +16,10 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-right: 20rem;
-    p{
+    .alert{
+        margin-bottom: 5rem;
+    }
+    .p{
 
         text-align: center;
         font-size: 48px;
@@ -41,43 +38,28 @@
 
 
 @media (max-width: 1050px) {
-
     .main{
-        margin: auto;
-        margin-right: 0;
         display: flex;
-        justify-content: center;
         align-items: center;
-        .formLogin{
-            margin-right: 0;
-        }
-
+        justify-content: center;
+        margin-top: 7rem;
     }
+
     .imgRegister{
         display: none;
     }
-    .fom{
-        margin-top: 9rem;  
-    }
+
 
 }
 
 
-@media (max-width: 590px) {
-    .main{
-        margin: auto;
-    
-    }
 
-}
 @media (max-width: 425px) {
     .main{
         margin: auto;
-        .fom{
-            width: 100%;
-        }
+
         .formLogin {
-            margin-top: 12rem;
+            margin-top: 7rem;
             width: 100%;
 
             p{

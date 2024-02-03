@@ -4,7 +4,6 @@ import { InputEmail, InputNameAndLastName, TextInput } from "./components/ui/inp
 import { AddModal } from "./components/ui/modalAdd";
 import { Tag } from "./components/ui/tag";
 import './global.scss'
-import Login from "./pages/LoginPage/Login";
 import { AuthProvider } from "./contexts/auth";
 import { Routes } from "./routes";
 import { GoogleOAuthProvider } from '@react-oauth/google';
