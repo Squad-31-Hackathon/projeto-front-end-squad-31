@@ -13,6 +13,14 @@ import { useState, useEffect } from "react";
 export default function DescobrirCard() {
   const [openModal, setOpenModal] = React.useState({});
 
+  function formatMonthYear(dateString) {
+    const date = new Date(dateString);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const year = date.getFullYear().toString().slice(-2);
+
+    return `${month}/${year}`;
+}
+
   const handleOpen = (uuid) => {
     setOpenModal((prevState) => ({
       ...prevState,
@@ -58,7 +66,7 @@ export default function DescobrirCard() {
                     {dados.owner.name} {dados.owner.lastName}
                 </p>
                 <FiberManualRecordIcon className={styles.ponto} />
-                <p>02/24</p>
+                <p>{formatMonthYear(dados.publishDate)}</p>
             </div>
         </div>
               </CardActionArea>
@@ -85,15 +93,16 @@ export default function DescobrirCard() {
                     <p>
                       {dados.owner.name} {dados.owner.lastName}
                     </p>
-                    <p>02/24</p>
+                    <p>{formatMonthYear(dados.publishDate)}</p>
                   </div>
                 </div>
                 <div className={styles.title}>
                   <p>{dados.title}</p>
                 </div>
                 <div className={styles.tags}>
-                  <span>{dados.tags}</span>
-                  <span>{dados.tags}</span>
+                {dados.tags.map((tag, index) => (
+                    <span key={index}>{tag}</span>
+                  ))}
                 </div>
               </div>
               <div className={styles.midle}>
@@ -108,12 +117,13 @@ export default function DescobrirCard() {
                         {dados.owner.name} {dados.owner.lastName}
                       </p>
                       <FiberManualRecordIcon className={styles.ponto} />
-                      <p>02/24</p>
+                      <p></p>
                     </div>
                   </div>
                   <div className={styles.tags}>
-                    <span>Tag1</span>
-                    <span>Tag2</span>
+                    {dados.tags.map((tag, index) => (
+                      <span key={index}>{tag}</span>
+                    ))}
                   </div>
                 </div>
               </div>
