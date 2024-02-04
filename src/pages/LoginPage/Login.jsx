@@ -8,8 +8,8 @@ import styles from "./styles.module.scss";
 
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from "../../contexts/auth";
-
-import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode"; 
 import { api } from "../../services/api";
 
 
@@ -25,6 +25,7 @@ export default function Login() {
     e.preventDefault();
     authLogin({ email, password });
     console.log(email);
+    console.log(password)
   };
 
   function handleGoogleLogin(credentialResponse) {
@@ -68,7 +69,6 @@ function registerGoogleUser(userInfo) {
         });
 }
 
-
   return (
     <div className={styles.main}>
       <div>
@@ -77,6 +77,12 @@ function registerGoogleUser(userInfo) {
 
       <div className={styles.fom}>
         <div className={styles.formLogin}>
+        <div className={styles.alert}>
+          {error && (
+            <erroLoggingIn />
+          )}
+        </div>
+
           <p className={styles.h1}>Entre no Orange Portfólio</p>
           <div className={styles.google}>
           <GoogleLogin
