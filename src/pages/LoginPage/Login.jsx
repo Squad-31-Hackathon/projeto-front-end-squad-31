@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from "../../contexts/auth";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; 
 
 
 export default function Login() {
@@ -23,6 +23,7 @@ export default function Login() {
     e.preventDefault();
     authLogin({ email, password });
     console.log(email)
+    console.log(password)
   }
  
   return (

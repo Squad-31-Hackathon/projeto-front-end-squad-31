@@ -12,3 +12,14 @@ export function MyAlert(){
        
     )
 }
+
+export function MyErrorAlert(){
+    return(
+        <div className={styles.div}> 
+            <Alert  className={styles.alert} variant="filled" severity="error">
+                <p >Não foi possível criar seu cadastro</p>
+            </Alert>
+       </div>
+       
+    )
+}
