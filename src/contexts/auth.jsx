@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
 import Cookies from "js-cookie";
-import { AddAlert } from "@mui/icons-material";
 
 const AuthContext = createContext({});
 
@@ -20,7 +19,6 @@ function AuthProvider({ children }) {
       setData({ token });
 
       console.log(response);
-      
     } catch (error) {
       if (error.response) {
         console.log("Não foi possivel entrar", error.response.data.message);

@@ -57,7 +57,18 @@ export function errorPasswordEmailEmpty(){
     )
 }
 
-export function erroEmailNaoCondizComASenha(){
+export function ErrorInvalidPasswordToEmail(){
+    return(
+        <div className={styles.div}> 
+            <Alert  className={styles.alert} variant="filled" severity="error">
+                <p >Senha incorreta</p>
+            </Alert>
+       </div>
+       
+    )
+}
+
+export function erroLoggingIn(){
     return(
         <div className={styles.div}> 
             <Alert  className={styles.alert} variant="filled" severity="error">
