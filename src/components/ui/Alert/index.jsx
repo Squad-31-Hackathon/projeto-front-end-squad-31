@@ -34,3 +34,36 @@ export function MyEmailErrorAlert(){
        
     )
 }
+
+export function errorLoginEmailEmpty(){
+    return(
+        <div className={styles.div}> 
+            <Alert  className={styles.alert} variant="filled" severity="error">
+                <p >Email Vazio</p>
+            </Alert>
+       </div>
+       
+    )
+}
+
+export function errorPasswordEmailEmpty(){
+    return(
+        <div className={styles.div}> 
+            <Alert  className={styles.alert} variant="filled" severity="error">
+                <p >Senha Vazio</p>
+            </Alert>
+       </div>
+       
+    )
+}
+
+export function erroEmailNaoCondizComASenha(){
+    return(
+        <div className={styles.div}> 
+            <Alert  className={styles.alert} variant="filled" severity="error">
+                <p >Senha incorreta</p>
+            </Alert>
+       </div>
+       
+    )
+}
