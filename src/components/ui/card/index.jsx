@@ -59,7 +59,7 @@ export default function DescobrirCard() {
               <CardActionArea>
                 <CardContent>
                   <div className={styles.card}>
-                    <img className={styles.img} src={dados.image}></img>
+                    <img className={styles.img} src={dados.image} />
                   </div>
                   
                 </CardContent>
