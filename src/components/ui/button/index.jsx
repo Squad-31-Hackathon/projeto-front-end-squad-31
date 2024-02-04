@@ -14,10 +14,13 @@ export function UsButton({children}){
 
     )
 }
-export function AddButton({children}){
+export function AddButton({children,reload}){
+    const handleClick = () =>{
+        reload()
+    }
     return(  
         <div className={styles.divAdd}>
-            <Button type="submit" className={styles.buttonAdd} variant="contained">{children}</Button>
+            <Button type="submit" className={styles.buttonAdd} variant="contained" onClick={handleClick}>{children}</Button>
         </div>    
 
     )

@@ -12,19 +12,33 @@ import CloseIcon from '@mui/icons-material/Close';
 import { AddButton, DeButton, DisButton } from '../button';
 import { InputNormal, TextInput } from '../input';
 import { api } from '../../../services/api';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function CardMP() {
-
- 
-  const [openEdit, setOpenEdit] = React.useState(false);
-    const handleOpenEdit = (uuid) => {
-        setOpenEx((prevState) => ({
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = (uuid) => {
+        setOpen((prevState) => ({
           ...prevState,
           [uuid]: true
         }));
-      };
+    };
+    const handleCloseT = (uuid) => {
+        setOpen((prevState) => ({
+          ...prevState,
+          [uuid]: false
+        }));
+      }
+ 
+
+  const [openEdit, setOpenEdit] = React.useState(false);
+    const handleOpenEdit = (uuid) => {
+        setOpenEdit((prevState) => ({
+          ...prevState,
+          [uuid]: true
+        }));
+    };
     const handleCloseEdit = (uuid) => {
-        setOpenEx((prevState) => ({
+        setOpenEdit((prevState) => ({
           ...prevState,
           [uuid]: false
         }));
@@ -74,7 +88,7 @@ const handleClose = () => {
     const [imageSrc, setImageSrc] = React.useState('');
   const [user, setUser] = React.useState('');
   const [formData, setFormData] = React.useState({
-    userUuid: '',
+    projectUuid: '',
     title: '',
     tags: [],
     description: '',
@@ -83,25 +97,7 @@ const handleClose = () => {
   });
 
 
-  React.useEffect(() => {
-
-      const fetchUser = async () => {
-        try {
-          const storedUser = localStorage.getItem("user");
-          if (storedUser) {
-            setUser(JSON.parse(storedUser));
-          } else {
-            const response = await api.get("/user");
-            setUser(response.data);
-            localStorage.setItem("user", JSON.stringify(response.data));
-          }
-        } catch (error) {
-          console.error("Erro ao chamar a API:", error);
-        }
-      };
-  
-      fetchUser();
-  }, []);
+ 
   React.useEffect(() => {
     if (user) {
       setFormData(prevFormData => ({
@@ -111,51 +107,7 @@ const handleClose = () => {
       }));
     }
   }, [user]);
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader.result);
-        setFormData(prevFormData => ({ ...prevFormData, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleChange = (e, name) => {
-    const { value } = e.target;
-
-    if (name === 'tags') {
-      const tagsArray = value.split(',').map(tag => tag.trim());
-      setFormData(prevFormData => ({ ...prevFormData, [name]: tagsArray }));
-    } else {
-      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
-    }
-    console.log(formData)
-
-  };
-
-  const handleSubmit = async (e) => {
-    
-    e.preventDefault();
-    try {
-      const response = await api.post('/project', formData,{
-        headers:{
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(response);
-      console.log('Registro bem-sucedido', response.data);
-    } catch (error) {
-        if(error.response){
-          console.error('Erro ao registrar:', error.response.data);
-        }
-      
-
-    }
-  };
+  
 
   const [openModal, setOpenModal] = React.useState({});
 
@@ -242,7 +194,47 @@ async function handleDelete(id) {
       }
     }
   };
-  
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result);
+        setFormData(prevFormData => ({ ...prevFormData, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleChange = (e, name) => {
+    const { value } = e.target;
+
+    if (name === 'tags') {
+      const tagsArray = value.split(',').map(tag => tag.trim());
+      setFormData(prevFormData => ({ ...prevFormData, [name]: tagsArray }));
+    } else {
+      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+    }
+  };
+
+async function handleSubmitEdit(e,id){
+    e.preventDefault();
+ 
+
+    try {
+        const response = await api.put(`/project/${id}`, formData);
+        console.log('Projeto editado com sucesso:', response.data);
+        
+        handleCloseEdit(id);
+        handleOpen(id);
+        
+    } catch (error) {
+        console.error('Erro ao editar projeto:', error);
+    }
+};
+const reload = ()=> {
+    window.location.reload();
+}
 
   return (
     <div className={styles.all}>
@@ -298,7 +290,7 @@ async function handleDelete(id) {
                     'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <li onClick={() => { handleClose(dados.uuid); handleOpenEdit();}}>Editar</li>
+                    <li onClick={() => { handleClose(dados.uuid); handleOpenEdit(dados.uuid);}}>Editar</li>
                     <li onClick={() => { handleClose(dados.uuid); handleOpenEx(dados.uuid);}}>Excluir</li>
                     <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid);}}>Visualizar</li>
                 </Menu>
@@ -374,14 +366,14 @@ async function handleDelete(id) {
                 
 
                 <Modal
-                        open={openEdit}
-                        onClose={handleCloseEdit}
+                        open={openEdit[dados.uuid]}
+                        onClose={() => handleCloseEdit(dados.uuid)}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
-                        <form className={styles.divE} onSubmit={handleSubmit}>
+                        <form className={styles.divE} onSubmit={(e) => handleSubmitEdit(e, dados.uuid)} >
                         <div className={styles.titleE}>
-                            <p>Adicionar projeto</p>
+                            <p>Editar projeto</p>
                         </div>
                         <div className={styles.midleE}>
                             <label className={`${styles.textImgE} ${imageSrc && styles.whiteBackground}`} tabIndex="0">
@@ -414,14 +406,26 @@ async function handleDelete(id) {
                         </div>
                         <div className={styles.finalE}>
                             <div>
-                            <p>Visualizar publicação</p>
                             </div>
                             <div className={styles.buttonsE}>
-                            <AddButton type="submit" children={'ENVIAR'} />
-                            <DisButton children={'CANCELAR'} handleClose={handleCloseEdit} />
+                            <AddButton type="submit" children={'ENVIAR'}  />
+                            <DisButton children={'CANCELAR'} handleClose={() => handleCloseEdit(dados.uuid)} />
                             </div>
                         </div>
                         </form>
+                    </Modal>
+                    <Modal
+                        open={open[dados.uuid]}
+                        onClose={()=> handleCloseT(dados.uuid)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                    <div className={styles.div3}>
+                        <p>Projeto adicionado com sucesso!</p>
+                        <CheckCircleIcon className={styles.su}/>
+                        <Button className={styles.buttonAdd} onClick={()=> {handleCloseT(dados.uuid);reload()}} variant="contained">VOLTAR PARA PROJETOS</Button>
+                    </div>
+                        
                     </Modal>
 
                     <Modal
