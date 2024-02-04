@@ -32,3 +32,15 @@ export function DisButton({children, handleClose}){
 
     )
 }
+export function DeButton({children,handleDele, handleClose}){
+    const handleClick = () => {
+        handleDele(); 
+        handleClose();
+    }
+    return(  
+        <div className={styles.divAdd}>
+            <Button type="submit" className={styles.buttonAdd}  onClick={handleClick}  variant="contained">{children}</Button>
+        </div>    
+
+    )
+}

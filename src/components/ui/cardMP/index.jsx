@@ -9,7 +9,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { AddButton, DisButton } from '../button';
+import { AddButton, DeButton, DisButton } from '../button';
 import { InputNormal, TextInput } from '../input';
 import { api } from '../../../services/api';
 
@@ -24,17 +24,25 @@ export default function CardMP() {
         setOpenEdit(false);
   };
   const [openEx, setOpenEx] = React.useState(false);
-  const handleOpenEx = () => {
-      setOpenEx(true);
-};
-  const handleCloseEx = () => {
-    setOpenEx(false);
-};
+ 
+const handleOpenEx = (uuid) => {
+    setOpenEx((prevState) => ({
+      ...prevState,
+      [uuid]: true
+    }));
+  };
+  
+  
+  const handleCloseEx = (uuid) => {
+    setOpenEx((prevState) => ({
+      ...prevState,
+      [uuid]: false
+    }));
+  };
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [openMenu, setOpenMenu] = React.useState({});
 
-// Função para abrir o menu de um item específico
 const handleOpenMenu = (uuid) => {
     setOpenMenu((prevState) => ({
         ...prevState,
@@ -43,12 +51,6 @@ const handleOpenMenu = (uuid) => {
 };
 
 
-const handleCloseMenu = (uuid) => {
-    setOpenMenu((prevState) => ({
-        ...prevState,
-        [uuid]: false
-    }));
-};
 
 
 const handleClick = (event, uuid) => {
@@ -222,6 +224,18 @@ const handleCloseM = (uuid) => {
 
     return `${month}/${year}`;
 }
+
+async function handleDelete(id) {
+    try {
+      const response = await api.delete(`/project/${id}`)
+      console.log(response);
+      console.log("Excluido com sucesso", response.data);
+    } catch (error) {
+      if (error.response) {
+        console.error("Erro ao excluir:", error.response.data);
+      }
+    }
+  };
   
 
   return (
@@ -279,7 +293,7 @@ const handleCloseM = (uuid) => {
                     }}
                 >
                     <li onClick={() => { handleClose(dados.uuid); handleOpenEdit();}}>Editar</li>
-                    <li onClick={() => { handleClose(dados.uuid); handleOpenEx();}}>Excluir</li>
+                    <li onClick={() => { handleClose(dados.uuid); handleOpenEx(dados.uuid);}}>Excluir</li>
                     <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid);}}>Visualizar</li>
                 </Menu>
                 </div>
@@ -403,8 +417,8 @@ const handleCloseM = (uuid) => {
                     </Modal>
 
                     <Modal
-                        open={openEx}
-                        onClose={handleCloseEx}
+                        open={openEx[dados.uuid]}
+                        onClose={() => handleCloseEx(dados.uuid)}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
@@ -417,8 +431,8 @@ const handleCloseM = (uuid) => {
                             
                         </div>
                         <div className={styles.finalEx}>
-                            <AddButton type="submit" children={'EXCLUIR'} />
-                            <DisButton children={'CANCELAR'} handleClose={handleCloseEx} />
+                            <DeButton type="submit" children={'EXCLUIR'} handleDele={() => handleDelete(dados.uuid)} handleClose={() => handleCloseEx(dados.uuid)}/>
+                            <DisButton children={'CANCELAR'} handleClose={() => handleCloseEx(dados.uuid)} />
                         </div>
                         </div>
                     </Modal>
