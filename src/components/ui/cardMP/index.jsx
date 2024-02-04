@@ -13,8 +13,11 @@ import { AddButton, DeButton, DisButton } from '../button';
 import { InputNormal, TextInput } from '../input';
 import { api } from '../../../services/api';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { ButtonModal } from '../modalAdd';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function CardMP() {
+  const [projectsLoaded, setProjectsLoaded] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const handleOpen = (uuid) => {
         setOpen((prevState) => ({
@@ -145,7 +148,6 @@ const handleCloseM = (uuid) => {
         } else {
           const response = await api.get("/user");
           setUserOn(response.data);
-          localStorage.setItem("user", JSON.stringify(response.data));
         }
       } catch (error) {
         console.error("Erro ao chamar a API:", error);
@@ -156,19 +158,21 @@ const handleCloseM = (uuid) => {
     return () => {
       };
 }, []);
-  React.useEffect(() => { 
-    if (!userOn || !userOn.id) return;
-    const fetchProjects = async () => {
-      try {
-        const response = await api.get("/project");
-        const userProjects = response.data.filter(project => project.owner.id === userOn.id);
-        setUserV(userProjects);
-      } catch (error) {
-        console.error("Erro ao buscar os projetos:", error);
-      }
-    };
-  
-    fetchProjects();
+React.useEffect(() => {
+  if (!userOn || !userOn.id) return;
+
+  const fetchUserProjects = async () => {
+    try {
+      const response = await api.get("/project");
+      const userProjects = response.data.filter(project => project.owner.id === userOn.id);
+      setUserV(userProjects);
+      setProjectsLoaded(true); 
+    } catch (error) {
+      console.error("Erro ao buscar os projetos:", error);
+    }
+  };
+
+  fetchUserProjects();
     return () => {
     };
     
@@ -236,65 +240,65 @@ const reload = ()=> {
     window.location.reload();
 }
 
-  return (
-    <div className={styles.all}>
-         {userV.map((dados) => (
-            <div className={styles.button}  key={dados.uuid} >
-                    
-
-                    <Card className={styles.cart}>
-                    <CardActionArea  >
-                        <CardContent>
-                            <div className={styles.card}>
-                                <img className={styles.img} src={dados.image}></img> 
-                            </div>
-                            <div div className={styles.perfilWrapper}>
-                                <div className={styles.finbar}>
-                                <div className={styles.perfil}>
-                                    <Avatar className={styles.perImg}/>
-                                    <p>{dados.owner.name} {dados.owner.lastName}</p>
-                                    <FiberManualRecordIcon className={styles.ponto}/>
-                                    <p>{formatMonthYear(dados.publishDate)}</p>
-                                </div>
-                                <div className={styles.tags}>
-                                {dados.tags.map((tag, index) => (
-                                    <span key={index}>{tag}</span>
-                                ))}
-                                </div>
-                            </div>
-                            </div>
-                            
-                        </CardContent>
-                    </CardActionArea>
-                    </Card>
-
-                
-
-                <div className={styles.func}>
-                <Button
-
-                    id="basic-button"
-                    onClick={(event) => handleClick(event, dados.uuid)}
-                    aria-controls={openMenu[dados.uuid] ? 'basic-menu' : undefined}
-                    aria-haspopup="true"
-                >
-                   <CreateIcon className={styles.pen}/>
-                </Button>
-                <Menu
-                    className={styles.menu}
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={openMenu[dados.uuid] || false}
-                    onClose={handleClose}
-                    MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                    }}
-                >
-                    <li onClick={() => { handleClose(dados.uuid); handleOpenEdit(dados.uuid);}}>Editar</li>
-                    <li onClick={() => { handleClose(dados.uuid); handleOpenEx(dados.uuid);}}>Excluir</li>
-                    <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid);}}>Visualizar</li>
-                </Menu>
+return (
+  <div className={styles.all}>
+    {userV.length === 0 && projectsLoaded && (
+      <ButtonModal />
+    )}
+    <div className={styles.ca}> {!projectsLoaded && userV.length === 0 && <CircularProgress />}</div>
+    
+     {
+      userV.map((dados) => (
+        <div className={styles.button} key={dados.uuid}>
+          <Card className={styles.cart}>
+            <CardActionArea>
+              <CardContent>
+                <div className={styles.card}>
+                  <img className={styles.img} src={dados.image} alt="Imagem do projeto" />
                 </div>
+                <div className={styles.perfilWrapper}>
+                  <div className={styles.finbar}>
+                    <div className={styles.perfil}>
+                      <Avatar className={styles.perImg} />
+                      <p>{dados.owner.name} {dados.owner.lastName}</p>
+                      <FiberManualRecordIcon className={styles.ponto} />
+                      <p>{formatMonthYear(dados.publishDate)}</p>
+                    </div>
+                    <div className={styles.tags}>
+                      {dados.tags.map((tag, index) => (
+                        <span key={index}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+
+          <div className={styles.func}>
+            <Button
+              id="basic-button"
+              onClick={(event) => handleClick(event, dados.uuid)}
+              aria-controls={openMenu[dados.uuid] ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+            >
+              <CreateIcon className={styles.pen} />
+            </Button>
+            <Menu
+              className={styles.menu}
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openMenu[dados.uuid] || false}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <li onClick={() => { handleClose(dados.uuid); handleOpenEdit(dados.uuid); }}>Editar</li>
+              <li onClick={() => { handleClose(dados.uuid); handleOpenEx(dados.uuid); }}>Excluir</li>
+              <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid); }}>Visualizar</li>
+            </Menu>
+          </div>
 
                 <Modal
                 
@@ -455,13 +459,8 @@ const reload = ()=> {
                     </Modal>
 
                     </div>
-       
-                   
-
- ))}
-
-    </div>
-    
-   
-  );
+      ))
+    }
+  </div>
+);
 }

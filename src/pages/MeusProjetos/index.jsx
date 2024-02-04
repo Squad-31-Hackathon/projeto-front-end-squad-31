@@ -13,14 +13,10 @@ import CardMP from "../../components/ui/cardMP";
 export function MeusProjetos() {
   
   const [user, setUser] = useState();
+  const [userProjects, setUserProjects] = useState([]);
 
   useEffect(() => {
-    {/*api
-      .get("/user/projects")
-      .then((response) => setUser(response.data))
-      .catch((err) => {
-        console.error("deu erro" + err);
-      });*/}
+    
       const fetchUser = async () => {
         try {
           const storedUser = localStorage.getItem("user");
@@ -29,7 +25,6 @@ export function MeusProjetos() {
           } else {
             const response = await api.get("/user");
             setUser(response.data);
-            localStorage.setItem("user", JSON.stringify(response.data));
           }
         } catch (error) {
           console.error("Erro ao chamar a API:", error);
