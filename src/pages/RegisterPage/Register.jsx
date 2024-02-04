@@ -8,6 +8,9 @@ import { api } from "../../services/api"
 import { useState, useEffect } from "react"
 import { MyAlert } from "../../components/ui/Alert"
 
+import { Link } from 'react-router-dom'
+
+
 
 export default function Register() {
 
@@ -76,6 +79,7 @@ export default function Register() {
             funcButton={ e => handleChange(e,"password")}
           />
           <UsButton type="submit">Cadastrar</UsButton>
+          <Link className={styles.link} to="/">Voltar para o login</Link>
         </form>
 
       </div>

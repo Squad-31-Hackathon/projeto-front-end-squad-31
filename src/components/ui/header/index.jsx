@@ -88,10 +88,8 @@ export function UsHeader() {
                   display: { xs: "flex", md: "none" },
                 }}
               >
-                <div className={styles.font}>
-                  <Link to={`/`}>Meus Projetos</Link>
-                  <Link to={`/descobrir`}>Descobrir</Link>
-                </div>
+                  <li className={styles.li}><Link to={`/`}>Meus Projetos</Link></li>
+                  <li className={styles.li}><Link to={`/descobrir`}>Descobrir</Link></li>
               </Menu>
             </Box>
             <img
@@ -129,7 +127,7 @@ export function UsHeader() {
                     <Avatar
                       className={styles.avatar}
                       alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
+
                     />
                   </IconButton>
                   <IconButton color="inherit">
