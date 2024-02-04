@@ -17,12 +17,18 @@ export default function CardMP() {
 
  
   const [openEdit, setOpenEdit] = React.useState(false);
-    const handleOpenEdit = () => {
-        setOpenEdit(true);
-  };
-    const handleCloseEdit = () => {
-        setOpenEdit(false);
-  };
+    const handleOpenEdit = (uuid) => {
+        setOpenEx((prevState) => ({
+          ...prevState,
+          [uuid]: true
+        }));
+      };
+    const handleCloseEdit = (uuid) => {
+        setOpenEx((prevState) => ({
+          ...prevState,
+          [uuid]: false
+        }));
+      }
   const [openEx, setOpenEx] = React.useState(false);
  
 const handleOpenEx = (uuid) => {
@@ -297,7 +303,9 @@ async function handleDelete(id) {
                     <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid);}}>Visualizar</li>
                 </Menu>
                 </div>
+
                 <Modal
+                
                     open={openModal[dados.uuid]}
                     onClose={() => handleCloseM(dados.uuid)}
                     aria-labelledby="modal-modal-title"

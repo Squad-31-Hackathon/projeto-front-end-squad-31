@@ -40,7 +40,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            pV{
+            p{
                 font-size: 12px;
             }
         }
@@ -169,7 +169,7 @@ li:hover{
     flex-wrap: wrap; 
     border: none;
     width: 28.9rem;
-    height: 28rem;
+    height: 25rem;
 
     .cart{
 
@@ -177,7 +177,7 @@ li:hover{
         display: flex;
         flex-direction: column;
         width: 28.9rem;
-        height: 28rem;
+        height: 25rem;
         position: relative;
         justify-content: space-between;
         .perfilWrapper {
@@ -186,7 +186,7 @@ li:hover{
             left: 0;
             width: 100%;
             width: 28.9rem;
-            height: 28rem;
+            height: 25rem;
             display: flex;
             align-items: flex-end;
             .finbar{

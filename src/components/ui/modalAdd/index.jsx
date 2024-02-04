@@ -1,11 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-
 import Modal from '@mui/material/Modal';
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 import { InputNormal, TextInput } from '../input';
 import { AddButton, DisButton } from '../button';
 import { api } from '../../../services/api';
+import CloseIcon from '@mui/icons-material/Close';
+import { Avatar } from '@mui/material';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
 
@@ -22,43 +25,50 @@ export function AddModal() {
     link: '',
     image: ''
   });
+  const [projectInfo, setProjectInfo] = React.useState(null);
+  const [successModalOpen, setSuccessModalOpen] = React.useState(false); // Estado para controlar a abertura do modal de sucesso
 
+  const data = () => {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${month}/${day}`;
+  };
 
   React.useEffect(() => {
-
-      const fetchUser = async () => {
-        try {
-          const storedUser = localStorage.getItem("user");
-          if (storedUser) {
-            setUser(JSON.parse(storedUser));
-          } else {
-            const response = await api.get("/user");
-            setUser(response.data);
-            localStorage.setItem("user", JSON.stringify(response.data));
-          }
-        } catch (error) {
-          console.error("Erro ao chamar a API:", error);
+    const fetchUser = async () => {
+      try {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        } else {
+          const response = await api.get("/user");
+          setUser(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
         }
-      };
-  
-      fetchUser();
+      } catch (error) {
+        console.error("Erro ao chamar a API:", error);
+      }
+    };
+
+    fetchUser();
   }, []);
+
   React.useEffect(() => {
     if (user) {
       setFormData(prevFormData => ({
         ...prevFormData,
         userUuid: user.id,
-
       }));
     }
   }, [user]);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      
       const reader = new FileReader();
       reader.onloadend = () => {
         setImageSrc(reader.result);
@@ -77,31 +87,22 @@ export function AddModal() {
     } else {
       setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
     }
-    console.log(formData)
-
   };
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     try {
-      const response = await api.post('/project', formData,{
-        headers:{
+      const response = await api.post('/project', formData, {
+        headers: {
           'Content-Type': 'application/json'
         }
       });
-      console.log(response);
-      console.log('Registro bem-sucedido', response.data);
+      setProjectInfo(response.data);
+      setOpen(false);
     } catch (error) {
-        if(error.response){
-          console.error('Erro ao registrar:', error.response.data);
-        }
-      
-
+      console.error('Erro ao registrar:', error.response ? error.response.data : error.message);
     }
   };
-
-
 
   return (
     <div>
@@ -124,7 +125,7 @@ export function AddModal() {
                 className={styles.img}
                 onChange={(e) => {
                   handleImageChange(e);
-                  handleChange(e, 'image'); 
+                  handleChange(e, 'image');
                 }}
               />
               <div id="imgText">
@@ -156,7 +157,90 @@ export function AddModal() {
           </div>
         </form>
       </Modal>
-    </div>
+
+
+      {projectInfo && (
+        <Modal
+          open={!!projectInfo}
+          onClose={() => setProjectInfo(null)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+                <div  className={styles.divV}> 
+                        <div className={styles.closeV}>
+                            <button onClick={() => {
+                              setProjectInfo(null); 
+                              setSuccessModalOpen(true); 
+                            }}><CloseIcon/></button>
+                        </div>
+                        <div className={styles.infoV}>
+                            <div className={styles.perfilV}>
+                                <div>
+                                    <Avatar/>
+                                </div>
+                                <div>
+                                    <p>{user.name} {user.lastName}</p>
+                                    <p>{data()}</p>
+                                </div>
+                            </div>
+                            <div className={styles.titleV}>
+                                <p>{projectInfo.title}</p>      
+                            </div>
+                            <div className={styles.tagsV}>
+                                {projectInfo.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
+                                    ))}
+                            </div>
+                        </div>
+                        <div className={styles.midleV} >
+                          
+                            <img className={styles.imgV} src={projectInfo.image}/>
+                            <div className={styles.respV}>
+                                <div className={styles.perfilV}>
+                                    <div>
+                                        <Avatar className={styles.avatarV} />
+                                    </div>
+                                    <div className={styles.textV}>
+                                        <p>{user.name} {user.lastName}</p>
+                                        <FiberManualRecordIcon className={styles.pontoV}/>
+                                        <p>{data()}</p>
+                                    </div>
+                                    
+                                </div>
+                                <div className={styles.tagsV}>
+                                        {projectInfo.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
+                                    ))}
+                                    </div>
+                            </div>  
+
+                        </div>
+                        <div className={styles.finalV}>
+                            <div className={styles.descrV}>
+                                <p>  {projectInfo.description}</p>
+                            </div>
+                            <div className={styles.linkV}>
+                                <p>Download</p>
+                                <a href={projectInfo.link}>{projectInfo.link}</a>
+                            </div>
+                        </div>
+                    </div>
+        </Modal>
+        
+      )}
+      <Modal
+        open={successModalOpen} 
+        onClose={() => setSuccessModalOpen(false)} 
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={styles.div3}>
+          <p>Projeto adicionado com sucesso!</p>
+          <CheckCircleIcon className={styles.su}/>
+          <Button className={styles.buttonAdd} onClick={() => setSuccessModalOpen(false)} variant="contained">VOLTAR PARA PROJETOS</Button>
+        </div>
+      </Modal>
+            </div>
   );
 }
 export function ButtonModal() {
