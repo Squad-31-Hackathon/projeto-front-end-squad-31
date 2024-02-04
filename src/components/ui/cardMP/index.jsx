@@ -423,7 +423,9 @@ const reload = ()=> {
                     <div className={styles.div3}>
                         <p>Projeto adicionado com sucesso!</p>
                         <CheckCircleIcon className={styles.su}/>
-                        <Button className={styles.buttonAdd} onClick={()=> {handleCloseT(dados.uuid);reload()}} variant="contained">VOLTAR PARA PROJETOS</Button>
+                        <Button className={styles.buttonAdd}
+                         onClick={()=> {handleCloseT(dados.uuid);reload()}} 
+                         variant="contained">VOLTAR PARA PROJETOS</Button>
                     </div>
                         
                     </Modal>
@@ -443,8 +445,11 @@ const reload = ()=> {
                             
                         </div>
                         <div className={styles.finalEx}>
-                            <DeButton type="submit" children={'EXCLUIR'} handleDele={() => handleDelete(dados.uuid)} handleClose={() => handleCloseEx(dados.uuid)}/>
-                            <DisButton children={'CANCELAR'} handleClose={() => handleCloseEx(dados.uuid)} />
+                            <DeButton type="submit" children={'EXCLUIR'} 
+                            handleDele={() => handleDelete(dados.uuid)} 
+                            handleClose={() => handleCloseEx(dados.uuid)}/>
+                            <DisButton children={'CANCELAR'} 
+                            handleClose={() => handleCloseEx(dados.uuid)} />
                         </div>
                         </div>
                     </Modal>
