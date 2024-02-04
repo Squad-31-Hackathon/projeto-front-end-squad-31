@@ -5,21 +5,31 @@ import styles from "./styles.module.scss";
 
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
-import { TagFacesRounded } from "@mui/icons-material";
 
 export function Descobrir() {
-  const [tags, setTags] = useState([]);
-  const [buscar, setBuscar] = useState();
+  const [dados, setDados] = useState([]); //dados api
+  const [buscar, setBuscar] = useState(); //input q será digitado
   console.log(buscar);
 
   useEffect(() => {
-    async function fetchTags() {
-      const response = await api.get("/project/tags");
-      console.log(response)
-      setTags(response.data);
+    let isMounted = true;  // variável para rastrear se o componente está montado
+  
+    if (buscar) {
+      const buscarDados = async () => {
+        const response = await api.get(`/project/tag/${buscar}`);
+        if (isMounted) {
+          setDados(response.data);
+          console.log(response.data);
+        }
+      };
+  
+      buscarDados();
     }
-    fetchTags();
-  }, []);
+  
+    return () => {
+      isMounted = false;  // definir como false quando o componente é desmontado
+    };
+  }, [buscar]);
 
   return (
     <div>
@@ -36,14 +46,20 @@ export function Descobrir() {
           </div>
         </div>
         <div className={styles.midle}>
-          <InputNormal
-            children={"Buscar Tags"}
-            value={buscar}
-            funcButton={(e) => setBuscar(e.target.value)}
-          />
+          <form>
+            <InputNormal
+              children={"Buscar Tags"}
+              value={buscar}
+              funcButton={(e) => setBuscar(e.target.value)}
+            />
+          </form>
         </div>
         <div className={styles.final}>
-          <DescobrirCard />
+          {(buscar ? dados.filter((dado) => dado.name === buscar) : dados).map(
+            (item) => (
+              <DescobrirCard key={item.index} data={item} />
+            )
+          )}
         </div>
       </div>
     </div>
