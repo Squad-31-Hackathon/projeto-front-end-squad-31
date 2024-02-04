@@ -4,6 +4,7 @@ import { InputNormal } from "../../components/ui/input";
 import styles from "./styles.module.scss";
 
 export function Descobrir() {
+  
   return (
     <div>
       <div className={styles.header}>

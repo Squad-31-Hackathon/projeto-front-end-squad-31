@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Avatar } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CollectionsIcon from '@mui/icons-material/Collections';
 
 
 
@@ -136,8 +137,9 @@ export function AddModal() {
                   <img src={imageSrc} alt="Selected" className={styles.selectedImage} />
                 ) : (
                   <span className={styles.textoInput}>
-                    <span>Selecione uma imagem</span>
-                    <span className="icon">Ícone Aqui</span>
+                    <span className={styles.colle}><CollectionsIcon/></span>
+                    <span>Compartilhe seu talento com milhares de pessoas</span>
+                    
                   </span>
                 )}
               </div>
@@ -370,8 +372,9 @@ export function ButtonModal() {
                   <img src={imageSrc} alt="Selected" className={styles.selectedImage} />
                 ) : (
                   <span className={styles.textoInput}>
-                    <span>Selecione uma imagem</span>
-                    <span className="icon">Ícone Aqui</span>
+                    <span className={styles.colle}><CollectionsIcon/></span>
+                    <span>Compartilhe seu talento com milhares de pessoas</span>
+                    
                   </span>
                 )}
               </div>

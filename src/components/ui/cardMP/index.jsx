@@ -425,7 +425,7 @@ return (
                         aria-describedby="modal-modal-description"
                     >
                     <div className={styles.div3}>
-                        <p>Projeto adicionado com sucesso!</p>
+                        <p>Edição concluída com sucesso!</p>
                         <CheckCircleIcon className={styles.su}/>
                         <Button className={styles.buttonAdd}
                          onClick={()=> {handleCloseT(dados.uuid);reload()}} 
