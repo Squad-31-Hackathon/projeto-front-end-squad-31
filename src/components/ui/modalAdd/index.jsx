@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import styles from './styles.module.scss'
 import { InputNormal, TextInput } from '../input';
-import { Tag } from '../tag';
 import { AddButton, DisButton } from '../button';
 import { api } from '../../../services/api';
 

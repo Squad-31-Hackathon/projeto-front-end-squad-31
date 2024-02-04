@@ -150,7 +150,7 @@ li:hover{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+
     flex-wrap: wrap; 
 
 }
@@ -169,7 +169,7 @@ li:hover{
     flex-wrap: wrap; 
     border: none;
     width: 28.9rem;
-    height: 25rem;
+    height: 28rem;
 
     .cart{
 
@@ -177,7 +177,7 @@ li:hover{
         display: flex;
         flex-direction: column;
         width: 28.9rem;
-        height: 25rem;
+        height: 28rem;
         position: relative;
         justify-content: space-between;
         .perfilWrapper {
@@ -186,7 +186,7 @@ li:hover{
             left: 0;
             width: 100%;
             width: 28.9rem;
-            height: 25rem;
+            height: 28rem;
             display: flex;
             align-items: flex-end;
             .finbar{
@@ -243,6 +243,11 @@ li:hover{
 
             margin-bottom: 5px;
         }
+    }
+}
+@media (max-width: 1100px) {
+    .all {
+        justify-content: center;
     }
 }
 
