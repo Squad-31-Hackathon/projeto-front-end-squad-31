@@ -32,32 +32,25 @@
     }
 }
 .midle{
-    width: 95%;
+    width: 90%;
     align-self: flex-start;
     margin-top: 20px;
+    margin-bottom: 50px;
     p{
         margin: 10px;
     }
+    
 }
 .final{
-    width: 100%;
-    //background-color: red;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
+    width: 90%;
+
+    
 
 }
-.final > div {
-   
-    margin-right: 10px;
-    margin-bottom: 90px;
-}
+
 @media (max-width: 860px) {
 
-    .final{
-        justify-content: center;
-    }
+
  
  }
 @media (max-width: 860px) {
