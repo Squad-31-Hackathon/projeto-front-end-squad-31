@@ -154,7 +154,7 @@ export function UsHeader() {
 
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" onClick={signOut}>
-                    Sair
+                  <Link to={`/`}>Sair</Link>
                   </Typography>
                 </MenuItem>
               </Menu>

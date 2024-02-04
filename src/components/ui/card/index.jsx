@@ -6,7 +6,8 @@ import { Avatar, CardActionArea } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import styles from "./styles.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { api } from "../../../services/api";
 import { useState, useEffect } from "react";
 
@@ -48,6 +49,9 @@ export default function DescobrirCard() {
 
   return (
     <div className={styles.all}>
+      <Box sx={{ display: 'flex' }}>
+      {user.length === 0 && <CircularProgress />}
+    </Box>
       {user.map((dados) => (
         <div key={dados.uuid}>
           <button className={styles.button} onClick={() => handleOpen(dados.uuid)}>
