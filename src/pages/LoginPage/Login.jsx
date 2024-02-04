@@ -43,7 +43,7 @@ export default function Login() {
             }
         })
         .catch(error => {
-            console.error('Erro ao verificar a existência do usuário:', error);
+            console.error('Erro ao verificar a existência do usuário: 000', error);
         });
 }
 
@@ -68,6 +68,7 @@ function registerGoogleUser(userInfo) {
         });
 }
 
+
   return (
     <div className={styles.main}>
       <div>
@@ -79,7 +80,6 @@ function registerGoogleUser(userInfo) {
           <p className={styles.h1}>Entre no Orange Portfólio</p>
           <div className={styles.google}>
           <GoogleLogin
-              buttonText="Entrar com o Google"
               flow="auth-code"
               onSuccess={handleGoogleLogin}
               onError={() => {

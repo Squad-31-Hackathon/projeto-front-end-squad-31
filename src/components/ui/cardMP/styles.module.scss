@@ -66,13 +66,13 @@
         width: 80%;
    
         .imgV{
-            width: 100%;
+            width: 80%;
             height: 100%;
             border-radius: 10px;
         }
     }
     .finalV{
-        width: 80%;
+        width: 90%;
 
         .descrV{
             margin-bottom: 10px;
@@ -389,6 +389,12 @@ li:hover{
     }
 
     
+}
+.ca{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .div3{
     position: fixed;

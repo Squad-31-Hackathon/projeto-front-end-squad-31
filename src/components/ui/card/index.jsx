@@ -49,9 +49,7 @@ export default function DescobrirCard() {
 
   return (
     <div className={styles.all}>
-      <Box sx={{ display: 'flex' }}>
-      {user.length === 0 && <CircularProgress />}
-    </Box>
+      {user.length === 0  &&< CircularProgress/>}
       {user.map((dados) => (
         <div key={dados.uuid}>
           <button className={styles.button} onClick={() => handleOpen(dados.uuid)}>
