@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 
 import { api } from "../../services/api"
 import { useState, useEffect } from "react"
-import { MyAlert } from "../../components/ui/Alert"
+import { MyAlert, MyErrorAlert, MyEmailErrorAlert } from "../../components/ui/Alert"
 
 import { Link } from 'react-router-dom'
 
@@ -16,6 +16,8 @@ export default function Register() {
 
   const [formData, setFormData] = useState({ name: '', lastName: '' })
   const [cadastroSucesso, setCadastroSucesso] = useState('');
+  const [error, setError] = useState('');
+  const [errorEmail, setErrorEmail] = useState('');
 
 
 
@@ -33,13 +35,27 @@ export default function Register() {
     try {
       const response = await api.post('/auth/register', formData);
       console.log('Registro bem-sucedido', response.data);
+      setError(false)
+      setErrorEmail(false)
       setCadastroSucesso(true)
     } catch (error) {
+      let errorMessage = '';
       if (error.response) {
         console.error('Erro ao registrar:', error.response.data);
-      }
-      setCadastroSucesso(false)
+        errorMessage = error.response.data.errorMessage
 
+        if(errorMessage == "Usuário com este email já cadastrado!"){
+          setErrorEmail(true)
+          setError(false)
+          setCadastroSucesso(false)
+        } else { 
+          setError(true)
+          setErrorEmail(false)
+          setCadastroSucesso(false)
+        }
+        
+      }
+      
     }
   };
 
@@ -52,15 +68,16 @@ export default function Register() {
 
       <div className={styles.formLogin}>
         <div className={styles.alert}>
-          {cadastroSucesso ? (
+          {cadastroSucesso && (
             <MyAlert />
-          ) : (
-            <div className={styles.errorAlert}>
-              <p>Erro ao cadastrar. Por favor, tente novamente.</p>
-            </div>
+          )}
+          {error && (
+            <MyErrorAlert />
+          )}
+          {errorEmail && (
+            <MyEmailErrorAlert />
           )}
         </div>
-
 
         <p className={styles.p}>Cadastre-se</p>
 
