@@ -40,7 +40,6 @@ export function MeusProjetos() {
   }, []);
 
   return (
-    //exemplo de cunsumo de api get <p>Usuario: {user?.name}</p>
     <div>
       <div className={styles.header}>
         <UsHeader/>

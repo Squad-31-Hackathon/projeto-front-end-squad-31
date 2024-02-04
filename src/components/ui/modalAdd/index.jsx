@@ -97,12 +97,8 @@ export function AddModal() {
         if(error.response){
           console.error('Erro ao registrar:', error.response.data);
         }
-      
-
     }
   };
-
-
 
   return (
     <div>
