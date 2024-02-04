@@ -6,7 +6,8 @@ import { Avatar, CardActionArea } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import styles from "./styles.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { api } from "../../../services/api";
 import { useState, useEffect } from "react";
 
@@ -48,6 +49,7 @@ export default function DescobrirCard() {
 
   return (
     <div className={styles.all}>
+      {user.length === 0  &&< CircularProgress/>}
       {user.map((dados) => (
         <div key={dados.uuid}>
           <button className={styles.button} onClick={() => handleOpen(dados.uuid)}>
@@ -55,7 +57,7 @@ export default function DescobrirCard() {
               <CardActionArea>
                 <CardContent>
                   <div className={styles.card}>
-                    <img className={styles.img} src={dados.image}></img>
+                    <img className={styles.img} src={dados.image} />
                   </div>
                   
                 </CardContent>
