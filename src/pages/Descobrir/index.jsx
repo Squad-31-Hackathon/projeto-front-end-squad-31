@@ -5,13 +5,13 @@ import { InputNormal } from "../../components/ui/input";
 import styles from "./styles.module.scss";
 
 export function Descobrir() {
-  
   const [tag, setTag] = useState('')
   const handleInputChange = (event) => {
     setTag(event.target.value);
     
   };
-  console.log(tag)
+  
+
   return (
     <div>
       <div className={styles.header}>
@@ -27,12 +27,13 @@ export function Descobrir() {
           </div>
         </div>
         <div className={styles.midle}>
-          <InputNormal children={"Buscar Tags"} 
+          <InputNormal children={"Buscar Tags"}
           value={tag}
-          onChange={handleInputChange}/>
+          funcButton={handleInputChange}
+          />
         </div>
         <div className={styles.final}>
-            <DescobrirCard tagFilter={tag} />
+            <DescobrirCard tagFilter={tag}/>
         </div>
       </div>
     </div>
