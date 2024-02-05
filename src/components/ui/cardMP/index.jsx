@@ -15,8 +15,9 @@ import { api } from '../../../services/api';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ButtonModal } from '../modalAdd';
 import CircularProgress from '@mui/material/CircularProgress';
+import CollectionsIcon from '@mui/icons-material/Collections';
 
-export default function CardMP() {
+export default function CardMP({ tagFilter }) {
   const [projectsLoaded, setProjectsLoaded] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const handleOpen = (uuid) => {
@@ -240,17 +241,19 @@ const reload = ()=> {
     window.location.reload();
 }
 
+
 return (
   <div className={styles.all}>
     {userV.length === 0 && projectsLoaded && (
       <ButtonModal />
     )}
     <div className={styles.ca}> {!projectsLoaded && userV.length === 0 && <CircularProgress />}</div>
-    
-     {
-      userV.map((dados) => (
-        <div className={styles.button} key={dados.uuid}>
-          <Card className={styles.cart}>
+    {userV.map((dados) => {
+        // Verifica se tagFilter foi passado e se o projeto contém a tag
+        if (tagFilter && dados.tags.includes(tagFilter)) {
+          return (
+            <div className={styles.button} key={dados.uuid}>
+            <Card className={styles.cart}>
             <CardActionArea>
               <CardContent>
                 <div className={styles.card}>
@@ -458,9 +461,228 @@ return (
                         </div>
                     </Modal>
 
+
+            </div>
+          );
+        } else if (!tagFilter) {
+          return (
+            <div className={styles.button} key={dados.uuid}>
+              <Card className={styles.cart}>
+            <CardActionArea>
+              <CardContent>
+                <div className={styles.card}>
+                  <img className={styles.img} src={dados.image} alt="Imagem do projeto" />
+                </div>
+                <div className={styles.perfilWrapper}>
+                  <div className={styles.finbar}>
+                    <div className={styles.perfil}>
+                      <Avatar className={styles.perImg} />
+                      <p>{dados.owner.name} {dados.owner.lastName}</p>
+                      <FiberManualRecordIcon className={styles.ponto} />
+                      <p>{formatMonthYear(dados.publishDate)}</p>
                     </div>
-      ))
-    }
-  </div>
+                    <div className={styles.tags}>
+                      {dados.tags.map((tag, index) => (
+                        <span key={index}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+
+          <div className={styles.func}>
+            <Button
+              id="basic-button"
+              onClick={(event) => handleClick(event, dados.uuid)}
+              aria-controls={openMenu[dados.uuid] ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+            >
+              <CreateIcon className={styles.pen} />
+            </Button>
+            <Menu
+              className={styles.menu}
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openMenu[dados.uuid] || false}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <li onClick={() => { handleClose(dados.uuid); handleOpenEdit(dados.uuid); }}>Editar</li>
+              <li onClick={() => { handleClose(dados.uuid); handleOpenEx(dados.uuid); }}>Excluir</li>
+              <li onClick={() => { handleClose(dados.uuid); handleOpenM(dados.uuid); }}>Visualizar</li>
+            </Menu>
+          </div>
+
+                <Modal
+                
+                    open={openModal[dados.uuid]}
+                    onClose={() => handleCloseM(dados.uuid)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div  className={styles.divV}> 
+                        <div className={styles.closeV}>
+                            <button onClick={() => handleCloseM(dados.uuid)}><CloseIcon/></button>
+                        </div>
+                        <div className={styles.infoV}>
+                            <div className={styles.perfilV}>
+                                <div>
+                                    <Avatar/>
+                                </div>
+                                <div>
+                                    <p>{dados.owner.name} {dados.owner.lastName}</p>
+                                    <p>{formatMonthYear(dados.publishDate)}</p>
+                                </div>
+                            </div>
+                            <div className={styles.titleV}>
+                                <p>{dados.title}</p>      
+                            </div>
+                            <div className={styles.tagsV}>
+                                {dados.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
+                                    ))}
+                            </div>
+                        </div>
+                        <div className={styles.midleV} >
+                          
+                            <img className={styles.imgV} src={dados.image}/>
+                            <div className={styles.respV}>
+                                <div className={styles.perfilV}>
+                                    <div>
+                                        <Avatar className={styles.avatarV} />
+                                    </div>
+                                    <div className={styles.textV}>
+                                        <p>{dados.owner.name} {dados.owner.lastName}</p>
+                                        <FiberManualRecordIcon className={styles.pontoV}/>
+                                        <p>{formatMonthYear(dados.publishDate)}</p>
+                                    </div>
+                                    
+                                </div>
+                                <div className={styles.tagsV}>
+                                        {dados.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
+                                    ))}
+                                    </div>
+                            </div>  
+
+                        </div>
+                        <div className={styles.finalV}>
+                            <div className={styles.descrV}>
+                                <p>  {dados.description}</p>
+                            </div>
+                            <div className={styles.linkV}>
+                                <p>Download</p>
+                                <a href={dados.link}>{dados.link}</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </Modal>
+
+
+                
+
+                <Modal
+                        open={openEdit[dados.uuid]}
+                        onClose={() => handleCloseEdit(dados.uuid)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <form className={styles.divE} onSubmit={(e) => handleSubmitEdit(e, dados.uuid)} >
+                        <div className={styles.titleE}>
+                            <p>Editar projeto</p>
+                        </div>
+                        <div className={styles.midleE}>
+                            <label className={`${styles.textImgE} ${imageSrc && styles.whiteBackground}`} tabIndex="0">
+                            <input
+                                id='addImg'
+                                type="file"
+                                className={styles.imgE}
+                                onChange={(e) => {
+                                handleImageChange(e);
+                                handleChange(e, 'image'); 
+                                }}
+                            />
+                            <div id="imgText">
+                                {imageSrc ? (
+                                <img src={imageSrc} alt="Selected" className={styles.selectedImageE} />
+                                ) : (
+                                <span className={styles.textoInputE}>
+                                    <span>Selecione uma imagem</span>
+                                    <span className="icon">Ícone Aqui</span>
+                                </span>
+                                )}
+                            </div>
+                            </label>
+                            <div className={styles.formE}>
+                            <InputNormal children={"Título"} name='title' value={formData.title} funcButton={e => handleChange(e, "title")} />
+                            <InputNormal name='tags' children={"Tags"} value={formData.tags} funcButton={e => handleChange(e, "tags")} />
+                            <InputNormal children={"Link"} name='link' value={formData.link} funcButton={e => handleChange(e, "link")} />
+                            <TextInput name='description' value={formData.description} funcButton={e => handleChange(e, "description")} />
+                            </div>
+                        </div>
+                        <div className={styles.finalE}>
+                            <div>
+                            </div>
+                            <div className={styles.buttonsE}>
+                            <AddButton type="submit" children={'ENVIAR'}  />
+                            <DisButton children={'CANCELAR'} handleClose={() => handleCloseEdit(dados.uuid)} />
+                            </div>
+                        </div>
+                        </form>
+                    </Modal>
+                    <Modal
+                        open={open[dados.uuid]}
+                        onClose={()=> handleCloseT(dados.uuid)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                    <div className={styles.div3}>
+                        <p>Edição concluída com sucesso!</p>
+                        <CheckCircleIcon className={styles.su}/>
+                        <Button className={styles.buttonAdd}
+                         onClick={()=> {handleCloseT(dados.uuid);reload()}} 
+                         variant="contained">VOLTAR PARA PROJETOS</Button>
+                    </div>
+                        
+                    </Modal>
+
+                    <Modal
+                        open={openEx[dados.uuid]}
+                        onClose={() => handleCloseEx(dados.uuid)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <div className={styles.divEx}>
+                        <div className={styles.titleEx}>
+                            <p>Deseja Excluir?</p>
+                        </div>
+                        <div className={styles.midleEx}>
+                            <p>Se você prosseguir irá excluir o projeto do seu portfólio</p>
+                            
+                        </div>
+                        <div className={styles.finalEx}>
+                            <DeButton type="submit" children={'EXCLUIR'} 
+                            handleDele={() => handleDelete(dados.uuid)} 
+                            handleClose={() => handleCloseEx(dados.uuid)}/>
+                            <DisButton children={'CANCELAR'} 
+                            handleClose={() => handleCloseEx(dados.uuid)} />
+                        </div>
+                        </div>
+                    </Modal>
+
+           
+            </div>
+          );
+                                }
+        })}
+      
+
+        </div>
 );
+
 }

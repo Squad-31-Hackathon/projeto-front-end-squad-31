@@ -13,7 +13,12 @@ import CardMP from "../../components/ui/cardMP";
 export function MeusProjetos() {
   
   const [user, setUser] = useState();
-  const [userProjects, setUserProjects] = useState([]);
+  const [tag, setTag] = useState('')
+  const handleInputChange = (event) => {
+    setTag(event.target.value);
+    
+  };
+  
 
   useEffect(() => {
     
@@ -35,7 +40,6 @@ export function MeusProjetos() {
   }, []);
 
   return (
-    //exemplo de cunsumo de api get <p>Usuario: {user?.name}</p>
     <div>
       <div className={styles.header}>
         <UsHeader/>
@@ -55,11 +59,13 @@ export function MeusProjetos() {
         <div className={styles.midle}>
           
           <p>Meus projetos</p>
-          <InputNormal children={"Buscar tags"}/>
+          <InputNormal children={"Buscar tags"}
+          value={tag}
+          funcButton={handleInputChange}/>
         </div>
         <div className={styles.final}>
 
-          <CardMP/>
+          <CardMP tagFilter={tag}/>
 
           
         </div>
