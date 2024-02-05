@@ -17,6 +17,7 @@ import { ButtonModal } from '../modalAdd';
 import CircularProgress from '@mui/material/CircularProgress';
 import CollectionsIcon from '@mui/icons-material/Collections';
 
+
 export default function CardMP({ tagFilter }) {
   const [projectsLoaded, setProjectsLoaded] = React.useState(false);
     const [open, setOpen] = React.useState(false);
@@ -249,7 +250,6 @@ return (
     )}
     <div className={styles.ca}> {!projectsLoaded && userV.length === 0 && <CircularProgress />}</div>
     {userV.map((dados) => {
-        // Verifica se tagFilter foi passado e se o projeto contém a tag
         if (tagFilter && dados.tags.includes(tagFilter)) {
           return (
             <div className={styles.button} key={dados.uuid}>
@@ -397,9 +397,10 @@ return (
                                 {imageSrc ? (
                                 <img src={imageSrc} alt="Selected" className={styles.selectedImageE} />
                                 ) : (
-                                <span className={styles.textoInputE}>
-                                    <span>Selecione uma imagem</span>
-                                    <span className="icon">Ícone Aqui</span>
+                                <span className={styles.as}>
+                                  <span className={styles.colle}><CollectionsIcon/></span>
+                                  <span className={styles.te}><p>Compartilhe seu talento com milhares de pessoas</p></span>
+                                  
                                 </span>
                                 )}
                             </div>
@@ -611,9 +612,10 @@ return (
                                 {imageSrc ? (
                                 <img src={imageSrc} alt="Selected" className={styles.selectedImageE} />
                                 ) : (
-                                <span className={styles.textoInputE}>
-                                    <span>Selecione uma imagem</span>
-                                    <span className="icon">Ícone Aqui</span>
+                                <span className={styles.as}>
+                                  <span className={styles.colle}><CollectionsIcon/></span>
+                                  <span className={styles.te}><p>Compartilhe seu talento com milhares de pessoas</p></span>
+                                  
                                 </span>
                                 )}
                             </div>

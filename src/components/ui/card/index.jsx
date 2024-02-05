@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import { api } from "../../../services/api";
 import { useState, useEffect } from "react";
 
-export default function DescobrirCard() {
+export default function DescobrirCard({tagFilter}) {
   const [openModal, setOpenModal] = React.useState({});
 
   function formatMonthYear(dateString) {
@@ -49,9 +49,13 @@ export default function DescobrirCard() {
 
   return (
     <div className={styles.all}>
-      {user.length === 0  &&< CircularProgress/>}
-      {user.map((dados) => (
-        <div key={dados.uuid}>
+      {user.length === 0  && <div className={styles.cir}>< CircularProgress/></div>}
+      {user.map((dados) =>{
+         {
+          
+          if (tagFilter && dados.tags.includes(tagFilter)) {
+            return (
+              <div key={dados.uuid}>
           <button className={styles.button} onClick={() => handleOpen(dados.uuid)}>
             <Card className={styles.cart}>
               <CardActionArea>
@@ -137,14 +141,116 @@ export default function DescobrirCard() {
                 </div>
                 <div className={styles.link}>
                   <p>Download</p>
-                  <a href="#">{dados.link}</a>
+                  <a href={dados.link}>{dados.link}</a>
                 </div>
               </div>
             </div>
           </Modal>
         </div>
-      ))}
+            );
+          } else if (!tagFilter) {
+            return (
+              <div key={dados.uuid}>
+          <button className={styles.button} onClick={() => handleOpen(dados.uuid)}>
+            <Card className={styles.cart}>
+              <CardActionArea>
+                <CardContent>
+                  <div className={styles.card}>
+                    <img className={styles.img} src={dados.image} />
+                  </div>
+                  
+                </CardContent>
+                <div className={styles.perfilWrapper}>
+                <div className={styles.perfil}>
+                <Avatar className={styles.perImg} />
+                <p>
+                    {dados.owner.name} {dados.owner.lastName}
+                </p>
+                <FiberManualRecordIcon className={styles.ponto} />
+                <p>{formatMonthYear(dados.publishDate)}</p>
+            </div>
+        </div>
+              </CardActionArea>
+            </Card>
+          </button>
+          <Modal
+            open={openModal[dados.uuid]}
+            onClose={() => handleClose(dados.uuid)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={styles.div}>
+              <div className={styles.close}>
+                <button onClick={() => handleClose(dados.uuid)}>
+                  <CloseIcon />
+                </button>
+              </div>
+              <div className={styles.info}>
+                <div className={styles.perfil}>
+                  <div>
+                    <Avatar />
+                  </div>
+                  <div>
+                    <p>
+                      {dados.owner.name} {dados.owner.lastName}
+                    </p>
+                    <p>{formatMonthYear(dados.publishDate)}</p>
+                  </div>
+                </div>
+                <div className={styles.title}>
+                  <p>{dados.title}</p>
+                </div>
+                <div className={styles.tags}>
+                {dados.tags.map((tag, index) => (
+                    <span key={index}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.midle}>
+                <img className={styles.img} src={dados.image}></img>
+                <div className={styles.resp}>
+                  <div className={styles.perfil}>
+                    <div>
+                      <Avatar className={styles.avatar} />
+                    </div>
+                    <div className={styles.text}>
+                      <p>
+                        {dados.owner.name} {dados.owner.lastName}
+                      </p>
+                      <FiberManualRecordIcon className={styles.ponto} />
+                      <p></p>
+                    </div>
+                  </div>
+                  <div className={styles.tags}>
+                    {dados.tags.map((tag, index) => (
+                      <span key={index}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className={styles.final}>
+                <div className={styles.descr}>
+                  <p>
+                    {dados.description}
+                  </p>
+                </div>
+                <div className={styles.link}>
+                  <p>Download</p>
+                  <a href={dados.link}>{dados.link}</a>
+                </div>
+              </div>
+            </div>
+          </Modal>
+        </div>
+            );
+          }
+        }
+
+      } )}
     </div>
   );
 }
 
+{/*(
+        
+      ) */}
