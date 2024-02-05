@@ -67,7 +67,10 @@
     justify-content: center;
     flex-direction: column;
 
-
+    a{
+        color: blue;
+        text-decoration: underline;
+    }
     .closeV{
         margin-top: -10px;
         margin-left: 10px;
@@ -159,6 +162,7 @@
     z-index: 1000;
     max-height: 80%;
     overflow-y: auto;
+
     .title{
         font-size: 24px;
         margin-bottom: 20px;

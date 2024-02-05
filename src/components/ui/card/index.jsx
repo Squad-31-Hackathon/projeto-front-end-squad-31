@@ -141,7 +141,7 @@ export default function DescobrirCard({tagFilter}) {
                 </div>
                 <div className={styles.link}>
                   <p>Download</p>
-                  <a href="#">{dados.link}</a>
+                  <a href={dados.link}>{dados.link}</a>
                 </div>
               </div>
             </div>
@@ -236,7 +236,7 @@ export default function DescobrirCard({tagFilter}) {
                 </div>
                 <div className={styles.link}>
                   <p>Download</p>
-                  <a href="#">{dados.link}</a>
+                  <a href={dados.link}>{dados.link}</a>
                 </div>
               </div>
             </div>
