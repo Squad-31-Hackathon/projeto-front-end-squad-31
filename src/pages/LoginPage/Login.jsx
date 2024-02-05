@@ -9,7 +9,8 @@ import styles from "./styles.module.scss";
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from "../../contexts/auth";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; 
+import { api } from "../../services/api";
 
 
 export default function Login() {
@@ -17,14 +18,57 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   const { authLogin } = useAuth();
 
   function handleAuthLogin(e) {
     e.preventDefault();
     authLogin({ email, password });
-    console.log(email)
-  }
- 
+    console.log(email);
+    console.log(password)
+  };
+
+  function handleGoogleLogin(credentialResponse) {
+    const userInfo = jwtDecode(credentialResponse.credential);
+    console.log(userInfo);
+
+
+    api.get(`/user/email/${userInfo.email}`)
+        .then(response => {
+            if (response.status === 200) {
+                authLogin({ email: userInfo.email, password: userInfo.sub });
+            } else if (response.status === 404) { 
+                registerGoogleUser(userInfo);
+            } else {
+                console.log("Erro ao verificar a existência do usuário");
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao verificar a existência do usuário: 000', error);
+        });
+}
+
+function registerGoogleUser(userInfo) {
+
+    const googleFormData = {
+        email: userInfo.email,
+        name: userInfo.given_name,
+        lastName: userInfo.family_name,
+        password: userInfo.sub
+    };
+
+
+    api.post('/auth/register', googleFormData)
+        .then((response) => {
+            console.log('Registro bem-sucedido', response.data);
+
+            authLogin({ email: googleFormData.email, password: googleFormData.password });
+        })
+        .catch((error) => {
+            console.error('Erro ao registrar:', error);
+        });
+}
+
   return (
     <div className={styles.main}>
       <div>
@@ -33,18 +77,18 @@ export default function Login() {
 
       <div className={styles.fom}>
         <div className={styles.formLogin}>
+        <div className={styles.alert}>
+        </div>
+
           <p className={styles.h1}>Entre no Orange Portfólio</p>
-          <div>
-            <GoogleLogin
+          <div className={styles.google}>
+          <GoogleLogin
               flow="auth-code"
-              onSuccess={async credentialResponse => {
-                console.log(credentialResponse);
-                const userInfo = jwtDecode(credentialResponse.credential)
-                console.log(userInfo) 
-              }}
+              onSuccess={handleGoogleLogin}
               onError={() => {
-                console.log('Login Failed');
+                console.log("Login Failed");
               }}
+              className={styles.Bgoogle}
             />
           </div>
 

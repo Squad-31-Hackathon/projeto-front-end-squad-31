@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import TextField from '@mui/material/TextField';
 import styles from './styles.module.scss';
+import { api } from '../../../services/api';
 
 
 
@@ -106,4 +107,36 @@ export function TextInput({funcButton}){
             </div>
   
     )
+}
+export function InputTags({ children, funcButton }) {
+    const [tag, setTag] = useState('');
+
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setTag(value);
+
+        if (value.trim() !== '') {
+            
+            api.get(`/project/tag/${value}`)
+                .then(response => {
+                   
+                    funcButton(response.data); 
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar projetos:', error);
+                });
+        }
+    };
+
+    return (
+        <div className={styles.divadd}>
+            <TextField
+                className={styles.input}
+                id="outlined-required"
+                label={children}
+                value={tag}
+                onChange={handleInputChange}
+            />
+        </div>
+    );
 }
