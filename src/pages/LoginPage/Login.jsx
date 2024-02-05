@@ -78,9 +78,6 @@ function registerGoogleUser(userInfo) {
       <div className={styles.fom}>
         <div className={styles.formLogin}>
         <div className={styles.alert}>
-          {error && (
-            <erroLoggingIn />
-          )}
         </div>
 
           <p className={styles.h1}>Entre no Orange Portfólio</p>
