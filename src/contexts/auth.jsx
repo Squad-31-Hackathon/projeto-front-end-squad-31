@@ -30,6 +30,7 @@ function AuthProvider({ children }) {
 
   function signOut() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setData({});
   }
 
