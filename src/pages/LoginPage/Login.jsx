@@ -30,21 +30,9 @@ export default function Login() {
   function handleGoogleLogin(credentialResponse) {
     const userInfo = jwtDecode(credentialResponse.credential);
     console.log(userInfo);
+    authLogin({ email: userInfo.email, password: userInfo.sub })    
+    registerGoogleUser(userInfo);
 
-
-    api.get(`/user/email/${userInfo.email}`)
-        .then(response => {
-            if (response.status === 200) {
-                authLogin({ email: userInfo.email, password: userInfo.sub });
-            } else if (response.status === 404) { 
-                registerGoogleUser(userInfo);
-            } else {
-                console.log("Erro ao verificar a existência do usuário");
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao verificar a existência do usuário: 000', error);
-        });
 }
 
 function registerGoogleUser(userInfo) {
@@ -60,7 +48,6 @@ function registerGoogleUser(userInfo) {
     api.post('/auth/register', googleFormData)
         .then((response) => {
             console.log('Registro bem-sucedido', response.data);
-
             authLogin({ email: googleFormData.email, password: googleFormData.password });
         })
         .catch((error) => {
