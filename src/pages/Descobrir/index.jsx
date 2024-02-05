@@ -1,9 +1,17 @@
+import { useState } from "react";
 import DescobrirCard from "../../components/ui/card";
 import { UsHeader } from "../../components/ui/header";
 import { InputNormal } from "../../components/ui/input";
 import styles from "./styles.module.scss";
 
 export function Descobrir() {
+  
+  const [tag, setTag] = useState('')
+  const handleInputChange = (event) => {
+    setTag(event.target.value);
+    
+  };
+  console.log(tag)
   return (
     <div>
       <div className={styles.header}>
@@ -19,10 +27,12 @@ export function Descobrir() {
           </div>
         </div>
         <div className={styles.midle}>
-          <InputNormal children={"Buscar Tags"} />
+          <InputNormal children={"Buscar Tags"} 
+          value={tag}
+          onChange={handleInputChange}/>
         </div>
         <div className={styles.final}>
-            <DescobrirCard />
+            <DescobrirCard tagFilter={tag} />
         </div>
       </div>
     </div>

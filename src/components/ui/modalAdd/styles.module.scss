@@ -11,6 +11,7 @@
     border: none;
     color: rgba(0, 0, 0, 0.38);
 }
+
 .div3{
     position: fixed;
     top: 50%;
@@ -201,10 +202,19 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        
         }
         span{
             color: #515255;
-            font-size: 16px;
+            font-size: 12px;
+            .colle{
+                svg{
+                    width: 4rem;
+                    height: 4rem;
+                }
+                margin-bottom: 1rem;
+    
+            }
         }
     }
     .textImg:hover{
