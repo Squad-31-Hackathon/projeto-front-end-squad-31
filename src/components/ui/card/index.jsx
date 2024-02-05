@@ -49,7 +49,7 @@ export default function DescobrirCard({tagFilter}) {
 
   return (
     <div className={styles.all}>
-      {user.length === 0  &&< CircularProgress/>}
+      {user.length === 0  && <div className={styles.cir}>< CircularProgress/></div>}
       {user.map((dados) =>{
          {
           

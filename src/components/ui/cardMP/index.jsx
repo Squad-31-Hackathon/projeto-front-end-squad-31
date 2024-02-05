@@ -249,7 +249,6 @@ return (
     )}
     <div className={styles.ca}> {!projectsLoaded && userV.length === 0 && <CircularProgress />}</div>
     {userV.map((dados) => {
-        // Verifica se tagFilter foi passado e se o projeto contém a tag
         if (tagFilter && dados.tags.includes(tagFilter)) {
           return (
             <div className={styles.button} key={dados.uuid}>
