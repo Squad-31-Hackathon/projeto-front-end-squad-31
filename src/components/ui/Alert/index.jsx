@@ -35,7 +35,7 @@ export function MyEmailErrorAlert(){
     )
 }
 
-export function errorLoginEmailEmpty(){
+export function ErrorLoginEmailEmpty(){
     return(
         <div className={styles.div}> 
             <Alert  className={styles.alert} variant="filled" severity="error">

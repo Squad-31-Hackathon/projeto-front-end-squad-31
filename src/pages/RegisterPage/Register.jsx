@@ -5,62 +5,53 @@ import imgRegister from '../../assets/img_register.png'
 import styles from './styles.module.scss'
 
 import { api } from "../../services/api"
-import { useState, useEffect } from "react"
-import { MyAlert, MyErrorAlert, MyEmailErrorAlert } from "../../components/ui/Alert"
+import { useState } from "react"
+import { MyAlert, MyErrorAlert, MyEmailErrorAlert, ErrorLoginEmailEmpty } from "../../components/ui/Alert"
 
 import { Link } from 'react-router-dom'
 
-
-
 export default function Register() {
-
-  const [formData, setFormData] = useState({ name: '', lastName: '' })
-  const [cadastroSucesso, setCadastroSucesso] = useState('');
-  const [error, setError] = useState('');
-  const [errorEmail, setErrorEmail] = useState('');
-
-
-
+  const [formData, setFormData] = useState({ name: '', lastName: '', email: '', password: '' });
+  const [cadastroSucesso, setCadastroSucesso] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorEmpty, setErrorEmpty] = useState(false);
 
   const handleChange = (e, name) => {
-
     const { value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log(formData)
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     try {
+      if (formData.email.trim() === '') {
+        setErrorEmpty(true);
+        return;
+      }
+
       const response = await api.post('/auth/register', formData);
       console.log('Registro bem-sucedido', response.data);
-      setError(false)
-      setErrorEmail(false)
-      setCadastroSucesso(true)
+      setErrorEmpty(false);
+      setErrorEmail(false);
+      setError(false);
+      setCadastroSucesso(true);
     } catch (error) {
       let errorMessage = '';
       if (error.response) {
         console.error('Erro ao registrar:', error.response.data);
-        errorMessage = error.response.data.errorMessage
+        errorMessage = error.response.data.errorMessage;
 
-        if(errorMessage == "Usuário com este email já cadastrado!"){
-          setErrorEmail(true)
-          setError(false)
-          setCadastroSucesso(false)
-        } else { 
-          setError(true)
-          setErrorEmail(false)
-          setCadastroSucesso(false)
+        if (errorMessage === "Usuário com este email já cadastrado!") {
+          setErrorEmail(true);
+        } else {
+          setError(true);
         }
-        
       }
-      
     }
   };
 
   return (
-
     <div className={styles.main}>
       <div>
         <img src={imgRegister} alt='img Register' className={styles.imgRegister} />
@@ -68,15 +59,10 @@ export default function Register() {
 
       <div className={styles.formLogin}>
         <div className={styles.alert}>
-          {cadastroSucesso && (
-            <MyAlert />
-          )}
-          {error && (
-            <MyErrorAlert />
-          )}
-          {errorEmail && (
-            <MyEmailErrorAlert />
-          )}
+          {cadastroSucesso && <MyAlert />}
+          {error && <MyErrorAlert />}
+          {errorEmail && <MyEmailErrorAlert />}
+          {errorEmpty && <ErrorLoginEmailEmpty />}
         </div>
 
         <p className={styles.p}>Cadastre-se</p>
@@ -103,10 +89,7 @@ export default function Register() {
           <UsButton type="submit">Cadastrar</UsButton>
           <Link className={styles.link} to="/">Voltar para o login</Link>
         </form>
-
       </div>
-
     </div>
-
-  )
+  );
 }
